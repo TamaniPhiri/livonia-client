@@ -8,7 +8,6 @@ const PaymentTracking = () => {
 
       {/* Payment form */}
       <div className="border-2 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl grid lg:grid-cols-2 grid-cols-1 items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
-
         {/* Client Name */}
         <div className="grid gap-2">
           <span>Client Name</span>
@@ -68,7 +67,32 @@ const PaymentTracking = () => {
           />
         </div>
         <div className="grid gap-2">
-          <span className="text-[#2b2b2b]">Tires</span>
+          <span className="text-[#2b2b2b]">Lubricants</span>
+          <input
+            type="text"
+            className="text-black p-3 rounded-md focus:outline-none"
+            placeholder="Size"
+          />
+        </div>
+        <div className="grid gap-2">
+          <input
+            type="text"
+            className="text-black p-3 rounded-md focus:outline-none"
+            placeholder="Quantity"
+          />
+        </div>
+
+        {/* Batteries */}
+        <div className="grid gap-2">
+          <span>Batteries</span>
+          <input
+            type="text"
+            className="text-black p-3 rounded-md focus:outline-none"
+            placeholder="Brand"
+          />
+        </div>
+        <div className="grid gap-2">
+          <span className="text-[#2b2b2b]">Batteries</span>
           <input
             type="text"
             className="text-black p-3 rounded-md focus:outline-none"
