@@ -60,7 +60,7 @@ const PaymentTracking = () => {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2 w-full">
+        <div className="grid gap-6 border-b pb-6 border-gray-600 lg:grid-cols-2 w-full">
           {/* Lubricants */}
           <div className="grid gap-2">
             <span>Lubricants</span>
