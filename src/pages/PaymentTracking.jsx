@@ -18,6 +18,8 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
+          
+          {/* Date name */}
           <div className="grid gap-2">
             <span>Date of Purchase</span>
             <input
