@@ -38,24 +38,26 @@ const PaymentTracking = () => {
             <span>Tires</span>
             <input
               type="text"
-              placeholder="Name"
+              placeholder="Brand"
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
 
-          {/* Clien */}
+          {/* Size and Quantity */}
           <div className="grid gap-2">
             <span className="text-[#2b2b2b] lg:block hidden">
-              Date of Purchase
+              D
             </span>
             <input
-              type="date"
+              type="text"
+              placeholder="Size"
               className="text-black p-3 rounded-md focus:outline-none"
             />
           </div>
           <div className="grid gap-2">
             <input
-              type="date"
+              type="text"
+              placeholder="Quantity"
               className="text-black p-3 rounded-md focus:outline-none"
             />
           </div>
