@@ -237,7 +237,7 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Payment method</span>
+            <span>Amount Paid</span>
             <input
               type="text"
               className=" p-3 rounded-md text-black focus:outline-none"
