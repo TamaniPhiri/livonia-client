@@ -5,6 +5,8 @@ const PaymentTracking = () => {
         Payment Tracking
       </h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
+
+        {/* Client Name and Date of Purchase */}
         <div className="grid gap-6 lg:grid-cols-2 w-full">
           <div className="grid gap-2">
             <span>Client Name</span>
