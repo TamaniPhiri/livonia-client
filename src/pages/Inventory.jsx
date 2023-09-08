@@ -36,6 +36,14 @@ const Inventory = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
+          <div className="grid gap-2">
+            <span>Price</span>
+            <input
+              type="text"
+              placeholder="Quantity"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
         </div>
       </div>
     </div>
