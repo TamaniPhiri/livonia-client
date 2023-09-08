@@ -8,6 +8,8 @@ const PaymentTracking = () => {
 
         {/* Client Name and Date of Purchase */}
         <div className="grid gap-6 lg:grid-cols-2 w-full">
+
+          {/* Client name */}
           <div className="grid gap-2">
             <span>Client Name</span>
             <input
