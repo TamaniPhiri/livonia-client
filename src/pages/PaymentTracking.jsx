@@ -32,6 +32,35 @@ const PaymentTracking = () => {
         </h1>
         
         {/* Product details*/}
+        <div className="grid gap-6 lg:grid-cols-2 border-b pb-4 border-gray-600 w-full">
+          {/* Tires */}
+          <div className="grid gap-2">
+            <span>Tires</span>
+            <input
+              type="text"
+              placeholder="Brand"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
+          {/* Size and Quantity */}
+          <div className="grid gap-2">
+            <span className="text-[#2b2b2b] lg:block hidden">
+              D
+            </span>
+            <input
+              type="text"
+              placeholder="Size"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <input
+              type="text"
+              placeholder="Quantity"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+        </div>
         <div className="grid gap-6 lg:grid-cols-2 w-full">
           {/* Tires */}
           <div className="grid gap-2">
