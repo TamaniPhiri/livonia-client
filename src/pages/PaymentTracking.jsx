@@ -11,7 +11,7 @@ const PaymentTracking = () => {
         </div>
         <div className="grid">
           <span>
-            Client Name
+            Date of Purchase
           </span>
           <input type="date" className="text-black"/>
         </div>
