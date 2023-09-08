@@ -7,7 +7,7 @@ const Navbar = () => {
         <Link to={'/'}></Link>
         <div className="lg:flex hidden gap-8">
           <Link to={'/client'}>Client Management</Link>
-          <Link to={''}>Inventory</Link>
+          <Link to={'/inventory'}>Inventory</Link>
           <Link to={'/payment-tracking'}>Payment Tracking</Link>
         </div>
       </nav>
