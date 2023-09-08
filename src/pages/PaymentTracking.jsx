@@ -243,7 +243,7 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
-          <button className="w-full">
+          <button className="w-full bg-blue-500 p-3 rounded-md">
             Record Payment
           </button>
         </div>
