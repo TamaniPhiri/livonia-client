@@ -18,7 +18,7 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
-          
+
           {/* Date name */}
           <div className="grid gap-2">
             <span>Date of Purchase</span>
@@ -28,16 +28,22 @@ const PaymentTracking = () => {
             />
           </div>
         </div>
+
+        {/* Product details*/}
         <h1 className="col-span-2 w-full mt-4 font-semibold text-left">Product Details</h1>
         <div className="grid gap-6 lg:grid-cols-2 w-full">
+
+          {/* Tires */}
           <div className="grid gap-2">
-            <span>Client Name</span>
+            <span>Tires</span>
             <input
               type="text"
               placeholder="Name"
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
+
+          {/* Clien */}
           <div className="grid gap-2">
             <span className="text-[#2b2b2b] lg:block hidden">Date of Purchase</span>
             <input
