@@ -23,6 +23,13 @@ const PaymentTracking = () => {
         <h1 className="col-span-2 w-full mt-4 font-semibold text-left">
           Product Details
         </h1>
+        <div className="grid gap-2">
+          <span>Tires</span>
+          <input
+            type="date"
+            className="text-black p-3 rounded-md focus:outline-none"
+          />
+        </div>
       </div>
     </div>
   );
