@@ -42,7 +42,6 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
-
           {/* Size and Quantity */}
           <div className="grid gap-2">
             <span className="text-[#2b2b2b] lg:block hidden">
