@@ -5,10 +5,8 @@ const PaymentTracking = () => {
         Payment Tracking
       </h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
-
         {/* Client Name and Date of Purchase */}
         <div className="grid gap-6 lg:grid-cols-2 w-full">
-
           {/* Client name */}
           <div className="grid gap-2">
             <span>Client Name</span>
@@ -29,10 +27,12 @@ const PaymentTracking = () => {
           </div>
         </div>
 
+        <h1 className="col-span-2 w-full mt-4 font-semibold text-left">
+          Product Details
+        </h1>
+        
         {/* Product details*/}
-        <h1 className="col-span-2 w-full mt-4 font-semibold text-left">Product Details</h1>
         <div className="grid gap-6 lg:grid-cols-2 w-full">
-
           {/* Tires */}
           <div className="grid gap-2">
             <span>Tires</span>
@@ -45,7 +45,9 @@ const PaymentTracking = () => {
 
           {/* Clien */}
           <div className="grid gap-2">
-            <span className="text-[#2b2b2b] lg:block hidden">Date of Purchase</span>
+            <span className="text-[#2b2b2b] lg:block hidden">
+              Date of Purchase
+            </span>
             <input
               type="date"
               className="text-black p-3 rounded-md focus:outline-none"
