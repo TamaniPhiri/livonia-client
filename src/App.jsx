@@ -5,6 +5,7 @@ import Inventory from "./pages/Inventory";
 import Client from "./pages/Client";
 import PaymentTracking from "./pages/PaymentTracking";
 import Navbar from "./components/Global/Navbar";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/inventory" Component={Inventory} />
         <Route path="/client" Component={Client} />
         <Route path="/payment-tracking" Component={PaymentTracking} />
+        <Route path="/login" Component={Login}/>
       </Routes>
     </>
   );
