@@ -228,7 +228,7 @@ const PaymentTracking = () => {
           </div>
         </div>
 
-        <div className="col-span-2 w-full mt-4 flex-col flex font-semibold text-left">
+        <div className="col-span-2 w-full mt-4 gap-6 flex-col flex font-semibold text-left">
           <div className="grid gap-2">
             <span>Payment method</span>
             <input
