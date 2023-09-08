@@ -115,6 +115,62 @@ const PaymentTracking = () => {
             />
           </div>
         </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 border-b pb-6 border-gray-600 w-full">
+          {/* Break Pads */}
+          <div className="grid gap-2">
+            <span>Break Pads</span>
+            <input
+              type="text"
+              placeholder="Brand"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
+          {/* Size and Quantity */}
+          <div className="grid gap-2">
+            <span className="text-[#2b2b2b] lg:block hidden">D</span>
+            <input
+              type="text"
+              placeholder="Size"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <input
+              type="text"
+              placeholder="Quantity"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 border-b pb-6 border-gray-600 w-full">
+          {/* Break Shoes */}
+          <div className="grid gap-2">
+            <span>Break Shoes</span>
+            <input
+              type="text"
+              placeholder="Brand"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
+          {/* Size and Quantity */}
+          <div className="grid gap-2">
+            <span className="text-[#2b2b2b] lg:block hidden">D</span>
+            <input
+              type="text"
+              placeholder="Size"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <input
+              type="text"
+              placeholder="Quantity"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
