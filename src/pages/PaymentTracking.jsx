@@ -7,13 +7,13 @@ const PaymentTracking = () => {
           <span>
             Client Name
           </span>
-          <input type="text" placeholder="Name" className=" p-3 rounded-md text-black"/>
+          <input type="text" placeholder="Name" className=" p-3 rounded-md text-black focus:outline-none"/>
         </div>
         <div className="grid gap-2">
           <span>
             Date of Purchase
           </span>
-          <input type="date" className="text-black p-3 rounded-md"/>
+          <input type="date" className="text-black p-3 rounded-md focus:outline-none"/>
         </div>
       </div>
     </div>
