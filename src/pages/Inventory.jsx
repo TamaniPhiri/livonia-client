@@ -40,7 +40,7 @@ const Inventory = () => {
             <span>Price</span>
             <input
               type="text"
-              placeholder="Quantity"
+              placeholder="Price"
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
