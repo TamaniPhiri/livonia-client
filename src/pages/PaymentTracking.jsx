@@ -32,7 +32,7 @@ const PaymentTracking = () => {
         </h1>
         
         {/* Product details*/}
-        <div className="grid gap-6 lg:grid-cols-2 border-b pb-4 border-gray-600 w-full">
+        <div className="grid gap-6 lg:grid-cols-2 border-b pb-6 border-gray-600 w-full">
           {/* Tires */}
           <div className="grid gap-2">
             <span>Tires</span>
