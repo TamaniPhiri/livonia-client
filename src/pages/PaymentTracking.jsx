@@ -5,8 +5,8 @@ const PaymentTracking = () => {
         Payment Tracking
       </h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
-        <div className="grid gap-2 lg:grid-cols-2 w-full">
-          <div className="grid">
+        <div className="grid gap-6 lg:grid-cols-2 w-full">
+          <div className="grid gap-2">
             <span>Client Name</span>
             <input
               type="text"
@@ -14,7 +14,7 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
-          <div className="grid">
+          <div className="grid gap-2">
             <span>Date of Purchase</span>
             <input
               type="date"
@@ -22,7 +22,30 @@ const PaymentTracking = () => {
             />
           </div>
         </div>
-        <h1 className="col-span-2 w-full text-left">Product Details</h1>
+        <h1 className="col-span-2 w-full mt-4 text-left">Product Details</h1>
+        <div className="grid gap-6 lg:grid-cols-2 w-full">
+          <div className="grid gap-2">
+            <span>Client Name</span>
+            <input
+              type="text"
+              placeholder="Name"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <span className="text-[#2b2b2b] lg:block hidden">Date of Purchase</span>
+            <input
+              type="date"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <input
+              type="date"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
