@@ -1,10 +1,14 @@
 const PaymentTracking = () => {
   return (
     <div className="flex items-center justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-28">
+      {/* heading */}
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
         Payment Tracking
       </h1>
+
+      {/* Payment form */}
       <div className="border-2 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl grid lg:grid-cols-2 grid-cols-1 items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
+        {/* Client Name */}
         <div className="grid gap-2">
           <span>Client Name</span>
           <input
@@ -12,6 +16,8 @@ const PaymentTracking = () => {
             placeholder="Name"
             className=" p-3 rounded-md text-black focus:outline-none"
           />
+
+          {/* Date of purchase */}
         </div>
         <div className="grid gap-2">
           <span>Date of Purchase</span>
@@ -37,6 +43,14 @@ const PaymentTracking = () => {
             type="text"
             className="text-black p-3 rounded-md focus:outline-none"
             placeholder="Size"
+          />
+        </div>
+        <div className="grid gap-2">
+          <span className="text-[#2b2b2b]">Tires</span>
+          <input
+            type="text"
+            className="text-black p-3 rounded-md focus:outline-none"
+            placeholder="Quantity"
           />
         </div>
       </div>
