@@ -49,10 +49,10 @@ const PaymentTracking = () => {
             placeholder="Size"
           />
         </div>
-        <div className="grid gap-2">
+        <div className="grid gap-2 col-span-2">
           <input
             type="text"
-            className="text-black p-3 rounded-md focus:outline-none"
+            className="text-black p-3 lg:w-1/2 rounded-md focus:outline-none"
             placeholder="Quantity"
           />
         </div>
@@ -77,7 +77,7 @@ const PaymentTracking = () => {
         <div className="grid gap-2">
           <input
             type="text"
-            className="text-black p-3 rounded-md focus:outline-none"
+            className="text-black p-3 lg:w-1/2 rounded-md focus:outline-none"
             placeholder="Quantity"
           />
         </div>
@@ -102,7 +102,7 @@ const PaymentTracking = () => {
         <div className="grid gap-2">
           <input
             type="text"
-            className="text-black p-3 rounded-md focus:outline-none"
+            className="text-black p-3 lg:w-1/2 rounded-md focus:outline-none"
             placeholder="Quantity"
           />
         </div>
