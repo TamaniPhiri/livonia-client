@@ -31,6 +31,14 @@ const PaymentTracking = () => {
             placeholder="Brand"
           />
         </div>
+        <div className="grid gap-2">
+          <span className="text-[#2b2b2b]">Tires</span>
+          <input
+            type="text"
+            className="text-black p-3 rounded-md focus:outline-none"
+            placeholder="Size"
+          />
+        </div>
       </div>
     </div>
   );
