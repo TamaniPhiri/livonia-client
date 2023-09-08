@@ -4,7 +4,7 @@ const PaymentTracking = () => {
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
         Payment Tracking
       </h1>
-      <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl grid lg:grid-cols-2 grid-cols-1 items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
+      <div className="border-2 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl grid lg:grid-cols-2 grid-cols-1 items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
         <div className="grid gap-2">
           <span>Client Name</span>
           <input
