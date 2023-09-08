@@ -22,7 +22,7 @@ const PaymentTracking = () => {
             />
           </div>
         </div>
-        <h1 className="col-span-2 w-full mt-4 text-left">Product Details</h1>
+        <h1 className="col-span-2 w-full mt-4 font-semibold text-left">Product Details</h1>
         <div className="grid gap-6 lg:grid-cols-2 w-full">
           <div className="grid gap-2">
             <span>Client Name</span>
