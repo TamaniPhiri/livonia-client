@@ -16,6 +16,9 @@ const PaymentTracking = () => {
           <input type="date" className="text-black p-3 rounded-md focus:outline-none"/>
         </div>
       </div>
+      <h1 className="col-span-2 w-full text-left">
+        Product Details
+      </h1>
     </div>
   )
 }
