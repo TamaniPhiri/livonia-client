@@ -30,7 +30,7 @@ const PaymentTracking = () => {
         <h1 className="col-span-2 w-full mt-4 font-semibold text-left">
           Product Details
         </h1>
-        
+
         {/* Product details*/}
         <div className="grid gap-6 lg:grid-cols-2 border-b pb-6 border-gray-600 w-full">
           {/* Tires */}
@@ -44,9 +44,7 @@ const PaymentTracking = () => {
           </div>
           {/* Size and Quantity */}
           <div className="grid gap-2">
-            <span className="text-[#2b2b2b] lg:block hidden">
-              D
-            </span>
+            <span className="text-[#2b2b2b] lg:block hidden">D</span>
             <input
               type="text"
               placeholder="Size"
@@ -61,10 +59,11 @@ const PaymentTracking = () => {
             />
           </div>
         </div>
+
         <div className="grid gap-6 lg:grid-cols-2 w-full">
-          {/* Tires */}
+          {/* Lubricants */}
           <div className="grid gap-2">
-            <span>Tires</span>
+            <span>Lubricants</span>
             <input
               type="text"
               placeholder="Brand"
@@ -73,9 +72,35 @@ const PaymentTracking = () => {
           </div>
           {/* Size and Quantity */}
           <div className="grid gap-2">
-            <span className="text-[#2b2b2b] lg:block hidden">
-              D
-            </span>
+            <span className="text-[#2b2b2b] lg:block hidden">D</span>
+            <input
+              type="text"
+              placeholder="Size"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-2">
+            <input
+              type="text"
+              placeholder="Quantity"
+              className="text-black p-3 rounded-md focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 border-b pb-6 border-gray-600 w-full">
+          {/* Batteries */}
+          <div className="grid gap-2">
+            <span>Batteries</span>
+            <input
+              type="text"
+              placeholder="Brand"
+              className=" p-3 rounded-md text-black focus:outline-none"
+            />
+          </div>
+          {/* Size and Quantity */}
+          <div className="grid gap-2">
+            <span className="text-[#2b2b2b] lg:block hidden">D</span>
             <input
               type="text"
               placeholder="Size"
