@@ -7,6 +7,8 @@ const Navbar = () => {
         <div>1</div>
         <div>
           <Link>Client Management</Link>
+          <Link>Inventory</Link>
+          <Link>Payment Tracking</Link>
         </div>
       </nav>
     </div>
