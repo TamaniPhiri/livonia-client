@@ -82,7 +82,11 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   <option value="">New</option>
                 </select>
               </div>
+
               {/* Add client Button */}
+                <button className="w-full bg-green-500 rounded-md p-3 mt-2">
+                    Add client
+                </button>
             </div>
           </motion.div>
         </motion.div>
