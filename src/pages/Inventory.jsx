@@ -44,6 +44,9 @@ const Inventory = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
+          <button className=" bg-blue-500 p-3 rounded-md col-span-2">
+            Create
+          </button>
         </div>
       </div>
     </div>
