@@ -26,7 +26,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsOpen(false)}
-          className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+          className="bg-slate-900/20 backdrop-blur px-4 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
         >
           <motion.div
             initial={{ scale: 0, rotate: "12.5deg" }}
@@ -60,19 +60,23 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               {/* Name */}
               <div className="grid gap-2">
                 <span className="font-semibold">Name</span>
-                <input type="text" className="p-3 rounded-md" />
+                <input type="text" className="p-3 rounded-md" placeholder="Client Name"/>
               </div>
 
               {/* Address */}
               <div className="grid gap-2">
                 <span className="font-semibold">Address</span>
-                <textarea className="p-3 rounded-md" />
+                <textarea className="p-3 rounded-md" placeholder="Address"/>
               </div>
 
-              {/* Name */}
+              {/* Client Category */}
               <div className="grid gap-2">
-                <span className="font-semibold">Name</span>
-                <input type="text" className="p-3 rounded-md" />
+                <span className="font-semibold">Client Category</span>
+                <select className="p-3 rounded-md text-black">
+                    <option value="">Loyal</option>
+                    <option value="">Potential</option>
+                    <option value="">New</option>
+                </select>
               </div>
             </div>
           </motion.div>
