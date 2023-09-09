@@ -4,7 +4,7 @@ const Client = () => {
        <h1 className="font-bold uppercase text-2xl md:text-4xl">Client management</h1>
 
        {/* Search Client */}
-       <div className="flex gap-2 w-full md:max-w-md rounded-full overflow-hidden lg:max-w-lg bg-white items-center justify-center mt-4">
+       <div className="flex gap-2 w-full md:max-w-sm rounded-full overflow-hidden lg:max-w-md bg-white items-center justify-center mt-4">
         <input type="text" className="flex-1 p-3 text-black focus:outline-none bg-transparent" placeholder="Search for clients"/>
           <button className="text-black p-3 rounded-full hover:bg-gray-300 m-1 transition-all transform duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
