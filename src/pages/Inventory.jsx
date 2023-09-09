@@ -4,6 +4,7 @@ const Inventory = () => {
       <h1 className="font-bold uppercase text-2xl md:text-4xl">Inventory</h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
         <div className="flex flex-col gap-6 items-center justify-center w-full">
+          {/* Product Name and Brand */}
           <div className="flex md:flex-row flex-col gap-4 w-full">
             <div className="grid gap-2 md:w-1/2 w-full">
               <span>Product Name</span>
@@ -24,6 +25,7 @@ const Inventory = () => {
             </div>
           </div>
 
+          {/* Size and Quantity */}
           <div className="flex md:flex-row flex-col gap-4 w-full">
             <div className="grid gap-2 md:w-1/2 w-full">
               <span>Size</span>
@@ -44,6 +46,7 @@ const Inventory = () => {
             </div>
           </div>
 
+            {/* Price */}
           <div className="flex flex-col gap-4 w-full">
             <div className="grid gap-2  md:w-1/2 w-full">
               <span>Price</span>
