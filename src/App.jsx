@@ -14,11 +14,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" Component={AdminLogin} />
-        <Route/>
+        <Route path="/dashboard" Component={Dashboard} />
         <Route path="/inventory" Component={Inventory} />
         <Route path="/client" Component={Client} />
         <Route path="/payment-tracking" Component={PaymentTracking} />
-        <Route path="/login" Component={Login}/>
+        <Route path="/login" Component={Login} />
       </Routes>
     </>
   );
