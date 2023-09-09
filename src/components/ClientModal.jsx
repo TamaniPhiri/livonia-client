@@ -59,18 +59,14 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               </div>
               {/* Name */}
               <div className="grid gap-2">
-                <span>
-                    Name
-                </span>
-                <input type="text" className="p-3 rounded-md"/>
+                <span>Name</span>
+                <input type="text" className="p-3 rounded-md" />
               </div>
 
-               {/* Name */}
-               <div className="grid gap-2">
-                <span>
-                    Address
-                </span>
-                <textarea className="p-3 rounded-md"/>
+              {/* Name */}
+              <div className="grid gap-2">
+                <span>Address</span>
+                <textarea className="p-3 rounded-md" />
               </div>
             </div>
           </motion.div>
