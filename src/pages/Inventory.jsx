@@ -24,22 +24,24 @@ const Inventory = () => {
             </div>
           </div>
 
-          <div className="grid gap-2">
-            <span>Size</span>
-            <input
-              type="text"
-              placeholder="Size"
-              className=" p-3 rounded-md text-black focus:outline-none"
-            />
-          </div>
+          <div className="flex md:flex-row flex-col gap-4 w-full">
+            <div className="grid gap-2">
+              <span>Size</span>
+              <input
+                type="text"
+                placeholder="Size"
+                className=" p-3 rounded-md text-black focus:outline-none"
+              />
+            </div>
 
-          <div className="grid gap-2">
-            <span>Quantity</span>
-            <input
-              type="text"
-              placeholder="Quantity"
-              className=" p-3 rounded-md text-black focus:outline-none"
-            />
+            <div className="grid gap-2">
+              <span>Quantity</span>
+              <input
+                type="text"
+                placeholder="Quantity"
+                className=" p-3 rounded-md text-black focus:outline-none"
+              />
+            </div>
           </div>
 
           <div className="grid gap-2">
