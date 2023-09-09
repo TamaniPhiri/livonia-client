@@ -1,7 +1,8 @@
-const SideBar = () => {
+// eslint-disable-next-line react/prop-types
+const SideBar = ({setActiveScreen}) => {
   return (
     <div className="h-screen border-r border-gray-700 pt-32 md:px-4">
-      <button className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1 w-full">
+      <button onClick={() => setActiveScreen('transactions')} className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1 w-full">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +21,7 @@ const SideBar = () => {
         </span>
         <span className="lg:block hidden">Transaction</span>
       </button>
-      <button className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1 w-full">
+      <button onClick={() => setActiveScreen('transactions')} className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1 w-full">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
