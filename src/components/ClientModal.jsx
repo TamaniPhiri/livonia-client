@@ -60,22 +60,26 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               {/* Name */}
               <div className="grid gap-2">
                 <span className="font-semibold">Name</span>
-                <input type="text" className="p-3 rounded-md" placeholder="Client Name"/>
+                <input
+                  type="text"
+                  className="p-3 rounded-md"
+                  placeholder="Client Name"
+                />
               </div>
 
               {/* Address */}
               <div className="grid gap-2">
                 <span className="font-semibold">Address</span>
-                <textarea className="p-3 rounded-md" placeholder="Address"/>
+                <textarea className="p-3 rounded-md" placeholder="Address" />
               </div>
 
               {/* Client Category */}
               <div className="grid gap-2">
                 <span className="font-semibold">Client Category</span>
                 <select className="p-3 rounded-md text-black">
-                    <option value="">Loyal</option>
-                    <option value="">Potential</option>
-                    <option value="">New</option>
+                  <option value="">Loyal</option>
+                  <option value="">Potential</option>
+                  <option value="">New</option>
                 </select>
               </div>
             </div>
