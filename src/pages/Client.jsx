@@ -5,7 +5,7 @@ const Client = () => {
         Client management
       </h1>
       <div>
-        <button className="bg-green-400">Add Client</button>
+        <button className="bg-green-500 p-3 mt-2 rounded-md">Add Client</button>
       </div>
 
       {/* Search Client */}
