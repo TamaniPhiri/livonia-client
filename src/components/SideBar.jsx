@@ -18,7 +18,7 @@ const SideBar = () => {
             />
           </svg>
         </span>
-        <span>Transactions</span>
+        <span className="lg:block hidden">Transactions</span>
       </button>
     </div>
   );
