@@ -84,9 +84,9 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               </div>
 
               {/* Add client Button */}
-                <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
-                    Add client
-                </button>
+              <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
+                Add client
+              </button>
             </div>
           </motion.div>
         </motion.div>
