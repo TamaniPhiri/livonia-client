@@ -22,8 +22,8 @@ const Navbar = () => {
           <div className="h-1 rounded-full bg-white w-8"></div>
           <div className="h-1 rounded-full bg-white w-8"></div>
         </button>
-        <div>
-          <div>
+        <div className="absolute top-[100%] right-0 min-h-screen bg-[#2b2b2b] inset-x-0">
+          <div className="flex w-full items-center justify-center flex-col py-56">
             <Link to={"/client"}>Client Management</Link>
             <Link to={"/inventory"}>Inventory</Link>
             <Link to={"/payment-tracking"}>Payment Tracking</Link>
