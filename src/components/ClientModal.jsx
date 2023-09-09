@@ -8,7 +8,7 @@ const ClientModal = () => {
     <div className="grid place-content-center mt-4">
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-green-500 text-black font-semibold p-3 mt-2 rounded-md"
+        className="bg-green-600 font-semibold p-3 mt-2 rounded-md"
       >
         Add Client
       </button>
@@ -84,7 +84,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               </div>
 
               {/* Add client Button */}
-                <button className="w-full bg-green-500 rounded-md p-3 mt-2">
+                <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
                     Add client
                 </button>
             </div>
