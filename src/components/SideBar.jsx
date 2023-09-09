@@ -1,7 +1,7 @@
 const SideBar = () => {
   return (
     <div className="fixed left-0 h-screen border-r border-gray-700 pt-32 px-4">
-      <button className="flex items-center p-1 rounded-md hover:bg-[#373737] gap-1">
+      <button className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ const SideBar = () => {
             />
           </svg>
         </span>
-        <span className="lg:block hidden">Transactions</span>
+        <span className="lg:block hidden">Transaction History</span>
       </button>
     </div>
   );
