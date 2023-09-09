@@ -25,7 +25,7 @@ const Inventory = () => {
           </div>
 
           <div className="flex md:flex-row flex-col gap-4 w-full">
-            <div className="grid gap-2">
+            <div className="grid gap-2 md:w-1/2 w-full">
               <span>Size</span>
               <input
                 type="text"
@@ -34,7 +34,7 @@ const Inventory = () => {
               />
             </div>
 
-            <div className="grid gap-2">
+            <div className="grid gap-2 md:w-1/2 w-full">
               <span>Quantity</span>
               <input
                 type="text"
@@ -44,18 +44,20 @@ const Inventory = () => {
             </div>
           </div>
 
-          <div className="grid gap-2">
-            <span>Price</span>
-            <input
-              type="text"
-              placeholder="Price"
-              className=" p-3 rounded-md text-black focus:outline-none"
-            />
-          </div>
+          <div className="flex md:flex-row flex-col gap-4 w-full">
+            <div className="grid gap-2">
+              <span>Price</span>
+              <input
+                type="text"
+                placeholder="Price"
+                className=" p-3 rounded-md text-black focus:outline-none"
+              />
+            </div>
 
-          <button className=" bg-blue-500 p-3 rounded-md col-span-2">
-            Create
-          </button>
+            <button className=" bg-blue-500 p-3 rounded-md col-span-2">
+              Create
+            </button>
+          </div>
         </div>
       </div>
     </div>
