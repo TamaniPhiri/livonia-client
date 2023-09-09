@@ -44,8 +44,8 @@ const Inventory = () => {
             </div>
           </div>
 
-          <div className="flex md:flex-row flex-col gap-4 w-full">
-            <div className="grid gap-2">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="grid gap-2  md:w-1/2 w-full">
               <span>Price</span>
               <input
                 type="text"
@@ -53,11 +53,10 @@ const Inventory = () => {
                 className=" p-3 rounded-md text-black focus:outline-none"
               />
             </div>
-
-            <button className=" bg-blue-500 p-3 rounded-md col-span-2">
+          </div>
+          <button className=" bg-blue-500 p-3 rounded-md w-full">
               Create
             </button>
-          </div>
         </div>
       </div>
     </div>
