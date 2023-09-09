@@ -15,13 +15,22 @@ const Navbar = () => {
           <Link to={"/inventory"}>Inventory</Link>
           <Link to={"/payment-tracking"}>Payment Tracking</Link>
         </div>
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden grid gap-1"
-        >
-          <div className={`h-1 rounded-full bg-white w-8 ${open?"translate-y-2 rotate-45":""} transition-all transform duration-500 delay-300`}></div>
-          <div className={`h-1 rounded-full bg-white w-8 ${open?"translate-x-[200%]":""} transition-all transform duration-300 delay-100`}></div>
-          <div className={`h-1 rounded-full bg-white w-8 ${open?"-translate-y-2 -rotate-45":""} transition-all transform duration-500 delay-300`}></div>
+        <button onClick={() => setOpen(!open)} className="lg:hidden grid gap-1">
+          <div
+            className={`h-1 rounded-full bg-white w-8 ${
+              open ? "translate-y-2 rotate-45" : ""
+            } transition-all transform duration-500 delay-300`}
+          ></div>
+          <div
+            className={`h-1 rounded-full bg-white w-8 ${
+              open ? "translate-x-[200%]" : ""
+            } transition-all transform duration-300 delay-100`}
+          ></div>
+          <div
+            className={`h-1 rounded-full bg-white w-8 ${
+              open ? "-translate-y-2 -rotate-45" : ""
+            } transition-all transform duration-500 delay-300`}
+          ></div>
         </button>
         <motion.div
           animate={
@@ -31,10 +40,20 @@ const Navbar = () => {
           }
           className="absolute top-[100%] right-0 min-h-screen bg-[#2b2b2b] inset-x-0"
         >
-          <div className="flex w-full text-xl gap-6 items-center justify-center flex-col py-56">
-            <Link onClick={() => setOpen(false)} to={"/inventory"}>Inventory</Link>
-            <Link onClick={() => setOpen(false)} to={"/client"}>Client Management</Link>
-            <Link onClick={() => setOpen(false)} to={"/payment-tracking"}>Payment Tracking</Link>
+          <div className="flex w-full text-xl gap-3 items-center justify-center flex-col py-56">
+            <Link onClick={() => setOpen(false)} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center" to={"/inventory"}>
+              Inventory
+            </Link>
+            <Link onClick={() => setOpen(false)} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center" to={"/client"}>
+              Client Management
+            </Link>
+            <Link
+              onClick={() => setOpen(false)}
+              className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center"
+              to={"/payment-tracking"}
+            >
+              Payment Tracking
+            </Link>
           </div>
         </motion.div>
       </nav>
