@@ -1,6 +1,6 @@
 const SideBar = () => {
   return (
-    <div className="h-screen border-r border-gray-700 pt-32 px-4">
+    <div className="h-screen border-r border-gray-700 pt-32 md:px-4">
       <button className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1">
         <span>
           <svg
