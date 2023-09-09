@@ -35,7 +35,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
             onClick={(e) => e.stopPropagation()}
             className="bg-[#2b2b2b] text-white p-3 md:p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
           >
-            <div className="relative z-10 w-full grid">
+            <div className="relative z-10 w-full grid gap-3">
               <div className="w-full flex justify-end items-end">
                 <button
                   onClick={() => setIsOpen(false)}
@@ -59,13 +59,13 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               </div>
               {/* Name */}
               <div className="grid gap-2">
-                <span>Name</span>
+                <span className="font-semibold">Name</span>
                 <input type="text" className="p-3 rounded-md" />
               </div>
 
               {/* Name */}
               <div className="grid gap-2">
-                <span>Address</span>
+                <span className="font-semibold">Address</span>
                 <textarea className="p-3 rounded-md" />
               </div>
             </div>
