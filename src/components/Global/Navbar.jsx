@@ -10,10 +10,10 @@ const Navbar = () => {
         <Link to={"/"} className="text-xl md:text-2xl font-bold">
           Livonia
         </Link>
-        <div className="lg:flex hidden gap-8">
-          <Link to={"/client"}>Client Management</Link>
-          <Link to={"/inventory"}>Inventory</Link>
-          <Link to={"/payment-tracking"}>Payment Tracking</Link>
+        <div className="lg:flex hidden gap-4">
+          <Link to={"/client"} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit py-1 px-3 rounded-xl">Client Management</Link>
+          <Link to={"/inventory"} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit py-1 px-3 rounded-xl">Inventory</Link>
+          <Link to={"/payment-tracking"} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit py-1 px-3 rounded-xl">Payment Tracking</Link>
         </div>
         <button onClick={() => setOpen(!open)} className="lg:hidden grid gap-1">
           <div
