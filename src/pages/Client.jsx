@@ -4,6 +4,9 @@ const Client = () => {
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
         Client management
       </h1>
+      <div>
+        <button>Add Client</button>
+      </div>
 
       {/* Search Client */}
       <div className="flex gap-2 w-full md:max-w-sm rounded-full overflow-hidden lg:max-w-md bg-white items-center justify-center mt-4">
