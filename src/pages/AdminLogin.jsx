@@ -12,7 +12,7 @@ const AdminLogin = () => {
           <span className="font-semibold">Password</span>
           <input type="password" placeholder="Password" className="text-black p-3 rounded-md focus:outline-none"/>
         </div>
-        <button className="bg-blue-500 p-3 rounded-md">
+        <button className="bg-blue-500 p-3 rounded-md mt-4">
             Login
         </button>
       </div>
