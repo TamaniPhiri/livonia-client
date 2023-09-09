@@ -25,7 +25,7 @@ const SideBar = ({ setActiveScreen }) => {
         <span className="lg:block hidden">Transaction</span>
       </button>
       <button
-        onClick={() => setActiveScreen("transactions")}
+        onClick={() => setActiveScreen("clients")}
         className="flex items-center p-2 rounded-md hover:bg-[#373737] gap-1 w-full"
       >
         <span>
