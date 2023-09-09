@@ -35,11 +35,11 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
             onClick={(e) => e.stopPropagation()}
             className="bg-[#2b2b2b] text-white p-3 md:p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
           >
-            <div className="relative z-10 w-full">
+            <div className="relative z-10 w-full grid">
               <div className="w-full flex justify-end items-end">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="bg-white text-black md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
+                  className="bg-[#3f3f3f] text-white md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +56,12 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                     />
                   </svg>
                 </button>
+              </div>
+              <div className="grid gap-2">
+                <span>
+                    Name
+                </span>
+                <input type="text" className="p-3 rounded-md"/>
               </div>
             </div>
           </motion.div>
