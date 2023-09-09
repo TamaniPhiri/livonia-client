@@ -9,7 +9,7 @@ const AdminLogin = () => {
         </div>
 
         <div className="grid gap-2">
-          <span className="font-semibold">Name</span>
+          <span className="font-semibold">Password</span>
           <input type="password" placeholder="Password" className="text-black p-3 rounded-md focus:outline-none"/>
         </div>
       </div>
