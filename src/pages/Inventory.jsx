@@ -46,7 +46,7 @@ const Inventory = () => {
             </div>
           </div>
 
-            {/* Price */}
+          {/* Price */}
           <div className="flex flex-col gap-4 w-full">
             <div className="grid gap-2  md:w-1/2 w-full">
               <span>Price</span>
@@ -57,9 +57,7 @@ const Inventory = () => {
               />
             </div>
           </div>
-          <button className=" bg-blue-500 p-3 rounded-md w-full">
-              Create
-            </button>
+          <button className=" bg-blue-500 p-3 rounded-md w-full">Create</button>
         </div>
       </div>
     </div>
