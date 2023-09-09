@@ -1,12 +1,11 @@
+import ClientModal from "../components/ClientModal";
+
 const Client = () => {
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-8 lg:px-12 w-full min-h-screen py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
         Client management
       </h1>
-      <div>
-        <button className="bg-green-500 p-3 mt-2 rounded-md">Add Client</button>
-      </div>
 
       {/* Search Client */}
       <div className="flex gap-2 w-full md:max-w-sm rounded-full overflow-hidden lg:max-w-md bg-white items-center justify-center mt-4">
@@ -32,6 +31,8 @@ const Client = () => {
           </svg>
         </button>
       </div>
+
+      <ClientModal />
     </div>
   );
 };
