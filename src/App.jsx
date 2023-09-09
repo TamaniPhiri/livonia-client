@@ -6,13 +6,15 @@ import Client from "./pages/Client";
 import PaymentTracking from "./pages/PaymentTracking";
 import Navbar from "./components/Global/Navbar";
 import Login from "./pages/Login";
+import AdminLogin from "./pages/AdminLogin";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" Component={Dashboard} />
+        <Route path="/" Component={AdminLogin} />
+        <Route/>
         <Route path="/inventory" Component={Inventory} />
         <Route path="/client" Component={Client} />
         <Route path="/payment-tracking" Component={PaymentTracking} />
