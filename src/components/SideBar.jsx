@@ -1,6 +1,6 @@
 const SideBar = () => {
   return (
-    <div className="fixed right-0">SideBar</div>
+    <div className="fixed left-0 h-screen border-r border-gray-700 pt-32 px-4">SideBar</div>
   )
 }
 
