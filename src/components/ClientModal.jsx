@@ -82,6 +82,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   <option value="">New</option>
                 </select>
               </div>
+              {/* Add client Button */}
             </div>
           </motion.div>
         </motion.div>
