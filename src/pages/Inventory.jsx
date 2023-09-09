@@ -1,6 +1,6 @@
 const Inventory = () => {
   return (
-    <div className="flex items-center justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-28">
+    <div className="flex items-center justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">Inventory</h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
         <div className="flex flex-col gap-6 items-center justify-center w-full">
