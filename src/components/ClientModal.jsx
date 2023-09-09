@@ -33,13 +33,13 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#2b2b2b] text-white p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+            className="bg-[#2b2b2b] text-white p-3 md:p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
           >
             <div className="relative z-10 w-full">
               <div className="w-full flex justify-end items-end">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="bg-white text-black p-3 mb-2 rounded-full text-3xl grid place-items-center"
+                  className="bg-white text-black md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
