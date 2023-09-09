@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AdminLogin = () => {
   return (
     <div className="flex items-center relative justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-32">
@@ -5,16 +7,27 @@ const AdminLogin = () => {
         <h1 className="text-xl font-bold">Admin Login</h1>
         <div className="grid gap-2">
           <span className="font-semibold">Name</span>
-          <input type="text" placeholder="User Name" className="text-black p-3 rounded-md focus:outline-none"/>
+          <input
+            type="text"
+            placeholder="User Name"
+            className="text-black p-3 rounded-md focus:outline-none"
+          />
         </div>
 
         <div className="grid gap-2">
           <span className="font-semibold">Password</span>
-          <input type="password" placeholder="Password" className="text-black p-3 rounded-md focus:outline-none"/>
+          <input
+            type="password"
+            placeholder="Password"
+            className="text-black p-3 rounded-md focus:outline-none"
+          />
         </div>
-        <button className="bg-blue-500 p-3 rounded-md mt-4">
-            Login
-        </button>
+        <Link
+          to={"/dashboard"}
+          className="bg-blue-500 text-center font-semibold shadow-lg p-3 rounded-md mt-4"
+        >
+          Login
+        </Link>
       </div>
     </div>
   );
