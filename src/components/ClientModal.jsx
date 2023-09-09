@@ -39,7 +39,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               <div className="w-full flex justify-end items-end">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="bg-[#3f3f3f] text-white md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
+                  className="bg-[#3f3f3f] active:scale-95 text-white md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
