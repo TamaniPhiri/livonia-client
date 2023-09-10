@@ -3,15 +3,20 @@ import ClientModal from "../components/ClientModal";
 import axios from "axios";
 
 const Client = () => {
-  const[clients,setClients]=useState([]);
-  useEffect(()=>{
-    const getClients=async()=>{
-      const response=await axios.get('http://localhost:8000/clients')
-      if(response.status===200){
-
+  const [clients, setClients] = useState([]);
+  useEffect(() => {
+    const getClients = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/clients");
+        if (response.status === 200) {
+          setClients(response.data);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    }
-  },[])
+    };
+    getClients();
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-8 lg:px-12 w-full min-h-screen py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
@@ -44,6 +49,11 @@ const Client = () => {
       </div>
 
       <ClientModal />
+      <div>
+        {clients.map((item, index) => (
+          <div key={index}>{item.name}</div>
+        ))}
+      </div>
     </div>
   );
 };
