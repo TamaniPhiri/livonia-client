@@ -1,6 +1,17 @@
+import { useEffect, useState } from "react";
 import ClientModal from "../components/ClientModal";
+import axios from "axios";
 
 const Client = () => {
+  const[clients,setClients]=useState([]);
+  useEffect(()=>{
+    const getClients=async()=>{
+      const response=await axios.get('http://localhost:8000/clients')
+      if(response.status===200){
+
+      }
+    }
+  },[])
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-8 lg:px-12 w-full min-h-screen py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
