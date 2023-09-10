@@ -6,7 +6,7 @@ const PaymentTracking = () => {
       </h1>
       <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
         {/* Client name */}
-        <div className="grid gap-2">
+        <div className="grid gap-2 w-full">
           <span>Client Name</span>
           <input
             type="text"
