@@ -49,9 +49,18 @@ const Client = () => {
       </div>
 
       <ClientModal />
-      <div>
+      <div className="rounded-xl bg-[#2b2b2b] p-4 grid w-full">
         {clients.map((item, index) => (
-          <div key={index}>{item.name}</div>
+          <div
+            key={index}
+            className="grid w-full md:border-none border-b grid-cols-1 md:grid-cols-5"
+          >
+            <div>{item.name}</div>
+            <div>{item.email}</div>
+            <div>{item.contact}</div>
+            <div>{item.address}</div>
+            <div>{item.category}</div>
+          </div>
         ))}
       </div>
     </div>
