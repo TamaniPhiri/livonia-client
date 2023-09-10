@@ -36,10 +36,13 @@ const PaymentTracking = () => {
             <option value="Tires">Tires</option>
             <option value="Lubricants">Lubricants</option>
             <option value="Batteries">Batteries</option>
-            <option value="">Break Pads</option>
-            <option value="">Break Shoes</option>
+            <option value="Break Pads">Break Pads</option>
+            <option value="Break Shoes">Break Shoes</option>
+            <option value="Tubes">Tubes</option>
+            <option value="Filters">Filters</option>
           </select>
-          {/* Lubricants */}
+
+          {/* Brand */}
           <div className=" text-black">
             <input
               type="text"
@@ -47,9 +50,8 @@ const PaymentTracking = () => {
               className=" p-3 rounded-md text-black focus:outline-none"
             />
           </div>
-          {/* Size and Quantity */}
+          {/* Size */}
           <div className="grid gap-2">
-            <span className="text-[#2b2b2b] lg:block hidden">D</span>
             <input
               type="text"
               placeholder="Size"
