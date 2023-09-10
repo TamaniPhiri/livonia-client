@@ -32,7 +32,7 @@ const PaymentTracking = () => {
         </h1>
 
         <div className="grid gap-6 border-b pb-6 border-gray-600 lg:grid-cols-2 w-full">
-          <select className="p-3 rounded-md">
+          <select className="p-3 rounded-md text-black">
             <option value="Tires">Tires</option>
             <option value="Lubricants">Lubricants</option>
             <option value="Batteries">Batteries</option>
