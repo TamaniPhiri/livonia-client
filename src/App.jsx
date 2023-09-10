@@ -7,6 +7,7 @@ import PaymentTracking from "./pages/PaymentTracking";
 import Navbar from "./components/Global/Navbar";
 import Login from "./pages/Login";
 import AdminLogin from "./pages/AdminLogin";
+import ClientTransactions from "./pages/ClientTransactions";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard/*" Component={Dashboard} />
         <Route path="/inventory" Component={Inventory} />
         <Route path="/client" Component={Client} />
+        <Route path="/client/transaction/:id" Component={ClientTransactions}/>
         <Route path="/payment-tracking" Component={PaymentTracking} />
         <Route path="/login" Component={Login} />
       </Routes>
