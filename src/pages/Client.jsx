@@ -53,13 +53,14 @@ const Client = () => {
         {clients.map((item, index) => (
           <div
             key={index}
-            className="grid w-full md:border-none border-b grid-cols-1 md:grid-cols-5"
+            className="grid w-full md:border-none border-b grid-cols-1 md:grid-cols-6"
           >
             <div>{item.name}</div>
             <div>{item.email}</div>
             <div>{item.contact}</div>
             <div>{item.address}</div>
             <div>{item.category}</div>
+            <div>Business history</div>
           </div>
         ))}
       </div>
