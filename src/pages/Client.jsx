@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ClientModal from "../components/ClientModal";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Client = () => {
   const [clients, setClients] = useState([]);
@@ -50,7 +51,7 @@ const Client = () => {
 
       <ClientModal />
       <div className="rounded-xl bg-[#2b2b2b] gap-3 p-4 grid w-full mt-6">
-        <div className="md:grid hidden w-full gap-3 font-extrabold border-b py-2 grid-cols-1 md:grid-cols-6">
+        <div className="md:grid hidden w-full gap-3 items-center font-extrabold border-b py-2 grid-cols-1 md:grid-cols-6">
           <div>Name</div>
           <div>Email</div>
           <div>Contact</div>
@@ -61,14 +62,14 @@ const Client = () => {
         {clients.map((item, index) => (
           <div
             key={index}
-            className="grid w-full capitalize border-b gap-3 grid-cols-1 py-2 md:grid-cols-6"
+            className="grid w-full capitalize items-center border-b gap-3 grid-cols-1 py-2 md:grid-cols-6"
           >
             <div>{item.name}</div>
             <div>{item.email}</div>
             <div>{item.contact}</div>
             <div>{item.address}</div>
             <div>{item.category}</div>
-            <div>Business history</div>
+            <Link to={`/client/transaction/${item.id}`} className="bg-blue-500 rounded-md text-center font-semibold p-2">Transactions</Link>
           </div>
         ))}
       </div>
