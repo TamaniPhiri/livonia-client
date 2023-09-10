@@ -22,7 +22,7 @@ const ClientTransactions = () => {
     getTransactions();
   }, [id]);
   return (
-    <div>
+    <div className="min-h-screen py-32 items-center justify-center flex w-full flex-col">
       <div>
         {transactions.map((item, index) => (
           <div key={index}>{item.name}</div>
