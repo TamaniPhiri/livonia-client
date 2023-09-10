@@ -49,7 +49,7 @@ const Client = () => {
       </div>
 
       <ClientModal />
-      <div className="rounded-xl bg-[#2b2b2b] p-4 grid w-full">
+      <div className="rounded-xl bg-[#2b2b2b] p-4 grid w-full mt-6">
         {clients.map((item, index) => (
           <div
             key={index}
