@@ -49,11 +49,19 @@ const Client = () => {
       </div>
 
       <ClientModal />
-      <div className="rounded-xl bg-[#2b2b2b] p-4 grid w-full mt-6">
+      <div className="rounded-xl bg-[#2b2b2b] gap-3 p-4 grid w-full mt-6">
+        <div className="md:grid hidden w-full gap-3 font-extrabold border-b py-2 grid-cols-1 md:grid-cols-6">
+          <div>Name</div>
+          <div>Email</div>
+          <div>Contact</div>
+          <div>Address</div>
+          <div>Category</div>
+          <div>Business history</div>
+        </div>
         {clients.map((item, index) => (
           <div
             key={index}
-            className="grid w-full md:border-none border-b grid-cols-1 md:grid-cols-6"
+            className="grid w-full capitalize border-b gap-3 grid-cols-1 py-2 md:grid-cols-6"
           >
             <div>{item.name}</div>
             <div>{item.email}</div>
