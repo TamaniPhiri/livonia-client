@@ -18,6 +18,11 @@ const ClientModal = () => {
 };
 
 const SpringModal = ({ isOpen, setIsOpen }) => {
+  const[clientName,setClientName]=useState("");
+  const[email,setEmail]=useState('');
+  const[contact,setContact]=useState("");
+  const[address,setAddress]=useState("");
+  const[category,setCategory]=useState("");
   return (
     <AnimatePresence>
       {isOpen && (
