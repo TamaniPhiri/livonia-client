@@ -50,7 +50,7 @@ const Client = () => {
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete these results"
+      "Are you sure you want to delete this client?"
     );
     if (confirmDelete) {
       try {
