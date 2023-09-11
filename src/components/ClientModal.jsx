@@ -86,6 +86,16 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 />
               </div>
 
+              {/* Email */}
+              <div className="grid gap-2">
+                <span className="font-semibold">Name</span>
+                <input
+                  type="text"
+                  className="p-3 rounded-md text-black focus:outline-none"
+                  placeholder="Client Name"
+                />
+              </div>
+
               {/* Address */}
               <div className="grid gap-2">
                 <span className="font-semibold">Address</span>
