@@ -19,27 +19,32 @@ const ClientModal = () => {
 };
 
 const SpringModal = ({ isOpen, setIsOpen }) => {
+  const [error, setError] = useState("");
   const [clientName, setClientName] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("New");
   const createClient = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/clients", {
-        name: clientName,
-        email,
-        contact,
-        address,
-        category,
-      });
-      if(response.status===200){
-        alert("CLient Created Successfully")
-        setIsOpen(false)
-        window.location.href='/client'
+    if (email || contact || category || address === "") {
+      setError("Please fill in the missing fields");
+    } else {
+      try {
+        const response = await axios.post("http://localhost:8000/clients", {
+          name: clientName,
+          email,
+          contact,
+          address,
+          category,
+        });
+        if (response.status === 200) {
+          alert("CLient Created Successfully");
+          setIsOpen(false);
+          window.location.href = "/client";
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
   return (
@@ -147,8 +152,15 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 </select>
               </div>
 
+              {error ? (
+                <span className="text-red-500 font-semibold">{error}</span>
+              ) : null}
+
               {/* Add client Button */}
-              <button onClick={createClient} className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
+              <button
+                onClick={createClient}
+                className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2"
+              >
                 Add client
               </button>
             </div>
