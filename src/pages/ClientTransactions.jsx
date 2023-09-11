@@ -29,8 +29,8 @@ const ClientTransactions = () => {
     return `${formattedDate} ${formattedTime}`;
   };
   return (
-    <div className="min-h-screen py-32 items-center justify-center flex w-full flex-col">
-      <div className=" grid grid-cols-5 gap-5 border w-full">
+    <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
+      <div className=" md:grid hidden grid-cols-5 gap-5 border w-full">
         <div>Date</div>
         <div>Name</div>
         <div>Brand</div>
@@ -38,7 +38,10 @@ const ClientTransactions = () => {
         <div>Amount</div>
       </div>
       {transactions.map((item, index) => (
-        <div key={index} className=" grid grid-cols-5 gap-5 border w-full">
+        <div
+          key={index}
+          className=" grid md:grid-cols-5 grid-cols-1 gap-5 border w-full"
+        >
           <div>{formatDate(item.createdAt)}</div>
           <div>{item.name}</div>
           <div>{item.brand}</div>
