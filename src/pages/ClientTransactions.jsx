@@ -25,7 +25,12 @@ const ClientTransactions = () => {
     <div className="min-h-screen py-32 items-center justify-center flex w-full flex-col">
       <div>
         {transactions.map((item, index) => (
-          <div key={index}>{item.name}</div>
+          <div key={index}>
+            <div>{item.name}</div>
+            <div>{item.brand}</div>
+            <div>{item.quantity}</div>
+            <div>{item.amount}</div>
+          </div>
         ))}
       </div>
     </div>
