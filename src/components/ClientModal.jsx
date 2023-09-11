@@ -26,9 +26,10 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("New");
   const createClient = async () => {
-    if (email || contact || category || address === "") {
-      setError("Please fill in the missing fields");
+    if (!clientName || !email || !contact || !address)  {
+      return setError("Please fill in the missing fields");
     } else {
+      setError("");
       try {
         const response = await axios.post("http://localhost:8000/clients", {
           name: clientName,
@@ -159,7 +160,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               {/* Add client Button */}
               <button
                 onClick={createClient}
-                className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2"
+                className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2"
               >
                 Add client
               </button>

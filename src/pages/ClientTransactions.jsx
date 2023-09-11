@@ -23,18 +23,29 @@ const ClientTransactions = () => {
     };
     getTransactions();
   }, [id]);
+  const formatDate = (createdAt) => {
+    const formattedDate = new Date(createdAt).toLocaleDateString();
+    const formattedTime = new Date(createdAt).toLocaleTimeString();
+    return `${formattedDate} ${formattedTime}`;
+  };
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full flex-col">
-      <div>
-        {transactions.map((item, index) => (
-          <div key={index}>
-            <div>{item.name}</div>
-            <div>{item.brand}</div>
-            <div>{item.quantity}</div>
-            <div>{item.amount}</div>
-          </div>
-        ))}
+      <div className=" grid grid-cols-5 gap-5 border w-full">
+        <div>Date</div>
+        <div>Name</div>
+        <div>Brand</div>
+        <div>Quantity</div>
+        <div>Amount</div>
       </div>
+      {transactions.map((item, index) => (
+        <div key={index} className=" grid grid-cols-5 gap-5 border w-full">
+          <div>{formatDate(item.createdAt)}</div>
+          <div>{item.name}</div>
+          <div>{item.brand}</div>
+          <div>{item.quantity}</div>
+          <div>{item.amount}</div>
+        </div>
+      ))}
       {error ? <span>{error}</span> : null}
     </div>
   );

@@ -90,16 +90,16 @@ const Client = () => {
           )
         );
         setSearchResults((prevResults) =>
-        prevResults.map((client) =>
-          client.id === updatedClient.id ? updatedClient : client
-        )
-      );
+          prevResults.map((client) =>
+            client.id === updatedClient.id ? updatedClient : client
+          )
+        );
         // Close the modal
         setUpdateModalOpen(false);
         setSelectedClient(null);
       }
     } catch (error) {
-      alert("Error Updating Client details",error);
+      alert("Error Updating Client details", error);
       console.log(error);
     }
   };
@@ -165,7 +165,7 @@ const Client = () => {
 
       <ClientModal />
       <div className="rounded-xl bg-[#2b2b2b] gap-3 p-4 grid w-full mt-6">
-        <div className="md:grid hidden w-full gap-3 items-center font-extrabold border-b py-2 grid-cols-1 md:grid-cols-6">
+        <div className="lg:grid hidden w-full gap-3 items-center font-extrabold border-b py-2 grid-cols-1 md:grid-cols-6">
           <div>Name</div>
           <div>Email</div>
           <div>Contact</div>
@@ -179,24 +179,24 @@ const Client = () => {
           searchResults.map((item, index) => (
             <div
               key={index}
-              className="grid w-full capitalize items-center border-b gap-3 grid-cols-1 py-2 md:grid-cols-6"
+              className="grid w-full text-sm capitalize items-center border-b gap-3 grid-cols-1 pr-4 py-3  lg:grid-cols-6"
             >
-              <div>{item.name}</div>
-              <div>{item.email}</div>
-              <div>{item.contact}</div>
-              <div>{item.address}</div>
-              <div>{item.category}</div>
+              <div className="md:pr-4">{item.name}</div>
+              <div className="md:pr-4">{item.email}</div>
+              <div className="md:pr-4">{item.contact}</div>
+              <div className="md:pr-4">{item.address}</div>
+              <div className="md:pr-4">{item.category}</div>
               <div className="flex items-center gap-1">
                 <Link
                   to={`/client/transaction/${item.id}`}
-                  className="bg-blue-500 rounded-md text-center font-semibold p-2"
+                  className="bg-blue-500 active:scale-95 transition-all transform rounded-md text-center font-semibold p-2"
                 >
                   Transactions
                 </Link>
-                <div className="flex items-center">
+                <div className="flex gap-1 items-center">
                   <button
                     onClick={() => handleDelete(item.id)}
-                    className="bg-red-500 p-2 rounded-md"
+                    className="bg-red-500 active:scale-95 transition-all transform p-[0.4rem] rounded-md"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,10 @@ const Client = () => {
                       />
                     </svg>
                   </button>
-                  <button onClick={() => handleUpdate(item)}>
+                  <button
+                    onClick={() => handleUpdate(item)}
+                    className="bg-white p-[0.4rem] active:scale-95 transition-all transform rounded-md text-black"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -347,7 +350,7 @@ const Client = () => {
 
                 {/* Add client Button */}
                 <button
-                  onClick={()=>handleSubmitUpdate()}
+                  onClick={() => handleSubmitUpdate()}
                   className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2"
                 >
                   Update client
