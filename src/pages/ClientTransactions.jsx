@@ -6,6 +6,7 @@ const ClientTransactions = () => {
   const { id } = useParams();
   console.log(id);
   const [transactions, setTransactions] = useState([]);
+  const [error, setError] = useState("");
   useEffect(() => {
     const getTransactions = async () => {
       try {
@@ -17,6 +18,7 @@ const ClientTransactions = () => {
         }
       } catch (error) {
         console.log(error);
+        setError(error.response.data);
       }
     };
     getTransactions();
@@ -33,6 +35,7 @@ const ClientTransactions = () => {
           </div>
         ))}
       </div>
+      {error ? <span>{error}</span> : null}
     </div>
   );
 };
