@@ -23,7 +23,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("New");
   const createClient = async () => {
     try {
       const response = await axios.post("http://localhost:8000/clients", {
