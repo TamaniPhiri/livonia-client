@@ -16,7 +16,7 @@ const Client = () => {
     email: "",
     contact: "",
     address: "",
-    category: "New",
+    category: "",
   });
 
   useEffect(() => {
@@ -65,14 +65,37 @@ const Client = () => {
   const handleUpdate = (client) => {
     setSelectedClient(client);
     setUpdateData({
-      reg: client.reg,
-      code: client.code,
-      semester: client.semester,
       name: client.name,
-      mark: client.mark,
-      gpa: client.gpa,
+      email: client.email,
+      contact: client.contact,
+      address: client.address,
+      category: client.category,
     });
     setUpdateModalOpen(true);
+  };
+
+  const handleSubmitUpdate = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/results/${selectedClient.id}`,
+        updateData
+      );
+      if (response.status === 200) {
+        // Update the client in the state
+        const updatedResult = response.data.client;
+        setClients((prevClients) =>
+          prevClients.map((client) =>
+            client.id === updatedResult.id ? updatedResult : client
+          )
+        );
+
+        // Close the modal
+        setUpdateModalOpen(false);
+      }
+    } catch (error) {
+      alert("Error Updating Client details");
+      console.log(error);
+    }
   };
 
   return (
@@ -317,7 +340,10 @@ const Client = () => {
                 </div>
 
                 {/* Add client Button */}
-                <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
+                <button
+                  onClick={handleSubmitUpdate}
+                  className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2"
+                >
                   Update client
                 </button>
               </div>
