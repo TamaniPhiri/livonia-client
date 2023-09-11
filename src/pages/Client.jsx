@@ -80,26 +80,26 @@ const Client = () => {
         `http://localhost:8000/clients/${selectedClient.id}`,
         updateData
       );
+      console.log(updateData);
       if (response.status === 200) {
         // Update the client in the state
         const updatedClient = response.data;
         setClients((prevClients) =>
-        prevClients.map((client) =>
-          client.id === updatedClient.id ? updatedClient : client
-        )
-      );
-
-      // Also update the search results if necessary
-      setSearchResults((prevResults) =>
+          prevClients.map((client) =>
+            client.id === updatedClient.id ? updatedClient : client
+          )
+        );
+        setSearchResults((prevResults) =>
         prevResults.map((client) =>
           client.id === updatedClient.id ? updatedClient : client
         )
       );
         // Close the modal
         setUpdateModalOpen(false);
+        setSelectedClient(null);
       }
     } catch (error) {
-      alert("Error Updating Client details");
+      alert("Error Updating Client details",error);
       console.log(error);
     }
   };

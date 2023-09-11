@@ -90,6 +90,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   placeholder="Client Name"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
+                  required
                 />
               </div>
 
@@ -102,6 +103,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   placeholder="Client E-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
 
@@ -114,6 +116,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   placeholder="Contact"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
+                  required
                 />
               </div>
 
@@ -125,6 +128,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   placeholder="Address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  required
                 />
               </div>
 
@@ -133,6 +137,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 <span className="font-semibold">Client Category</span>
                 <select
                   onChange={(e) => setCategory(e.target.value)}
+                  required
                   value={category}
                   className="p-3 rounded-md text-black focus:outline-none"
                 >
