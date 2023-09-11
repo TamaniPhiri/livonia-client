@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
@@ -18,11 +19,24 @@ const ClientModal = () => {
 };
 
 const SpringModal = ({ isOpen, setIsOpen }) => {
-  const[clientName,setClientName]=useState("");
-  const[email,setEmail]=useState('');
-  const[contact,setContact]=useState("");
-  const[address,setAddress]=useState("");
-  const[category,setCategory]=useState("");
+  const [clientName, setClientName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
+  const createClient = async () => {
+    try {
+      const response = await axios.post("", {
+        name: clientName,
+        email,
+        contact,
+        address,
+        category,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <AnimatePresence>
       {isOpen && (
@@ -75,7 +89,10 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               {/* Address */}
               <div className="grid gap-2">
                 <span className="font-semibold">Address</span>
-                <textarea className="p-3 rounded-md text-black focus:outline-none" placeholder="Address" />
+                <textarea
+                  className="p-3 rounded-md text-black focus:outline-none"
+                  placeholder="Address"
+                />
               </div>
 
               {/* Client Category */}
