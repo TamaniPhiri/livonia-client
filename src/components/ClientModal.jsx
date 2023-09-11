@@ -26,13 +26,18 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
   const [category, setCategory] = useState("");
   const createClient = async () => {
     try {
-      const response = await axios.post("", {
+      const response = await axios.post("http://localhost:8000/clients", {
         name: clientName,
         email,
         contact,
         address,
         category,
       });
+      if(response.status===200){
+        alert("CLient Created Successfully")
+        setIsOpen(false)
+        window.location.href='/client'
+      }
     } catch (error) {
       console.log(error);
     }
@@ -100,6 +105,18 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 />
               </div>
 
+              {/* Contact */}
+              <div className="grid gap-2">
+                <span className="font-semibold">Contact</span>
+                <input
+                  type="text"
+                  className="p-3 rounded-md text-black focus:outline-none"
+                  placeholder="Contact"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                />
+              </div>
+
               {/* Address */}
               <div className="grid gap-2">
                 <span className="font-semibold">Address</span>
@@ -126,7 +143,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
               </div>
 
               {/* Add client Button */}
-              <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
+              <button onClick={createClient} className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
                 Add client
               </button>
             </div>
