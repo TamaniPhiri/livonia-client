@@ -83,6 +83,8 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   type="text"
                   className="p-3 rounded-md text-black focus:outline-none"
                   placeholder="Client Name"
+                  value={clientName}
+                  onChange={(e)=>setClientName(e.target.value)}
                 />
               </div>
 
@@ -93,6 +95,8 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   type="text"
                   className="p-3 rounded-md text-black focus:outline-none"
                   placeholder="Client E-mail"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
               </div>
 
