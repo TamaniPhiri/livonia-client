@@ -92,7 +92,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 <input
                   type="text"
                   className="p-3 rounded-md text-black focus:outline-none"
-                  placeholder="Client Name"
+                  placeholder="Client E-mail"
                 />
               </div>
 
