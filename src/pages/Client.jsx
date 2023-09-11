@@ -38,19 +38,19 @@ const Client = () => {
     setNoResults(false);
   };
 
-  const handleDelete=async(id)=>{
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete these results"
     );
-    if(confirmDelete){
+    if (confirmDelete) {
       try {
-        axios.delete(`http://localhost:8000/clients/${id}`)
+        axios.delete(`http://localhost:8000/clients/${id}`);
         setSearchResults(searchResults.filter((client) => client.id !== id));
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-8 lg:px-12 w-full min-h-screen py-32">
@@ -142,7 +142,10 @@ const Client = () => {
                   Transactions
                 </Link>
                 <div className="flex items-center">
-                  <button onClick={()=>handleDelete(item.id)} className="bg-red-500 p-2 rounded-md">
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="bg-red-500 p-2 rounded-md"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
