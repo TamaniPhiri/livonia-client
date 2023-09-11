@@ -120,7 +120,7 @@ const Client = () => {
               <div>{item.contact}</div>
               <div>{item.address}</div>
               <div>{item.category}</div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-1">
                 <Link
                   to={`/client/transaction/${item.id}`}
                   className="bg-blue-500 rounded-md text-center font-semibold p-2"
