@@ -28,27 +28,37 @@ const ClientTransactions = () => {
     const formattedTime = new Date(createdAt).toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
   };
+  const formatAmount = (amount) => {
+    // Use Number.parseFloat to ensure the amount is treated as a number
+    const formattedAmount = Number.parseFloat(amount).toLocaleString();
+    return formattedAmount;
+  };
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
-      <div className=" md:grid hidden grid-cols-5 gap-5 border w-full">
+      <div className=" md:grid hidden text-lg font-bold grid-cols-6 gap-5 border rounded-t w-full p-2">
         <div>Date</div>
         <div>Name</div>
         <div>Brand</div>
         <div>Quantity</div>
         <div>Amount</div>
+        <div>Total</div>
       </div>
-      {transactions.map((item, index) => (
+      {transactions.map((item, index) => {
+        const total = item.quantity * item.amount;
+        return(
         <div
           key={index}
-          className=" grid md:grid-cols-5 grid-cols-1 gap-5 border w-full"
+          className=" grid md:grid-cols-6 capitalize grid-cols-1 gap-5 border w-full p-2"
         >
           <div>{formatDate(item.createdAt)}</div>
           <div>{item.name}</div>
           <div>{item.brand}</div>
           <div>{item.quantity}</div>
-          <div>{item.amount}</div>
+          <div>{formatAmount(item.amount)}</div>
+          <div className="md:border-none border-t">{formatAmount(total)}</div>
         </div>
-      ))}
+        )
+      })}
       {error ? <span>{error}</span> : null}
     </div>
   );
