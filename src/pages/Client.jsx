@@ -276,7 +276,7 @@ const Client = () => {
 
                 {/* Add client Button */}
                 <button className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2">
-                  Add client
+                  Update client
                 </button>
               </div>
             </motion.div>
