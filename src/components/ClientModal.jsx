@@ -84,7 +84,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   className="p-3 rounded-md text-black focus:outline-none"
                   placeholder="Client Name"
                   value={clientName}
-                  onChange={(e)=>setClientName(e.target.value)}
+                  onChange={(e) => setClientName(e.target.value)}
                 />
               </div>
 
@@ -96,7 +96,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   className="p-3 rounded-md text-black focus:outline-none"
                   placeholder="Client E-mail"
                   value={email}
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -106,16 +106,22 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                 <textarea
                   className="p-3 rounded-md text-black focus:outline-none"
                   placeholder="Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
 
               {/* Client Category */}
               <div className="grid gap-2">
                 <span className="font-semibold">Client Category</span>
-                <select className="p-3 rounded-md text-black focus:outline-none">
-                  <option value="">Loyal</option>
-                  <option value="">Potential</option>
-                  <option value="">New</option>
+                <select
+                  onChange={(e) => setCategory(e.target.value)}
+                  value={category}
+                  className="p-3 rounded-md text-black focus:outline-none"
+                >
+                  <option value="Loyal">Loyal</option>
+                  <option value="Potentail">Potential</option>
+                  <option value="New">New</option>
                 </select>
               </div>
 
