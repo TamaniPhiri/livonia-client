@@ -77,18 +77,24 @@ const Client = () => {
   const handleSubmitUpdate = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/results/${selectedClient.id}`,
+        `http://localhost:8000/clients/${selectedClient.id}`,
         updateData
       );
       if (response.status === 200) {
         // Update the client in the state
-        const updatedResult = response.data.client;
+        const updatedClient = response.data;
         setClients((prevClients) =>
-          prevClients.map((client) =>
-            client.id === updatedResult.id ? updatedResult : client
-          )
-        );
+        prevClients.map((client) =>
+          client.id === updatedClient.id ? updatedClient : client
+        )
+      );
 
+      // Also update the search results if necessary
+      setSearchResults((prevResults) =>
+        prevResults.map((client) =>
+          client.id === updatedClient.id ? updatedClient : client
+        )
+      );
         // Close the modal
         setUpdateModalOpen(false);
       }
@@ -341,7 +347,7 @@ const Client = () => {
 
                 {/* Add client Button */}
                 <button
-                  onClick={handleSubmitUpdate}
+                  onClick={()=>handleSubmitUpdate()}
                   className="w-full font-semibold bg-green-600 rounded-md p-3 mt-2"
                 >
                   Update client
