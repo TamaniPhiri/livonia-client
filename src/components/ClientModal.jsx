@@ -120,7 +120,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   className="p-3 rounded-md text-black focus:outline-none"
                 >
                   <option value="Loyal">Loyal</option>
-                  <option value="Potentail">Potential</option>
+                  <option value="Potential">Potential</option>
                   <option value="New">New</option>
                 </select>
               </div>
