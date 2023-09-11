@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 
 const ClientTransactions = () => {
   const { id } = useParams();
+  console.log(id);
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
     const getTransactions = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/transaction/client/${id}`
+          `http://localhost:8000/transaction/${id}`
         );
         if (response.status === 200) {
           setTransactions(response.data);
