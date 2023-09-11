@@ -5,16 +5,19 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Client = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [clientUpdateName, setUpdateClientName] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
-  const [category, setCategory] = useState("New");
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [clients, setClients] = useState([]);
   const [clientName, setClientName] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const [updateData, setUpdateData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    address: "",
+    category: "New",
+  });
 
   useEffect(() => {
     const getClients = async () => {
@@ -57,6 +60,19 @@ const Client = () => {
         console.log(error);
       }
     }
+  };
+
+  const handleUpdate = (client) => {
+    setSelectedClient(client);
+    setUpdateData({
+      reg: client.reg,
+      code: client.code,
+      semester: client.semester,
+      name: client.name,
+      mark: client.mark,
+      gpa: client.gpa,
+    });
+    setUpdateModalOpen(true);
   };
 
   return (
@@ -168,6 +184,22 @@ const Client = () => {
                       />
                     </svg>
                   </button>
+                  <button onClick={() => handleUpdate(item)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -176,12 +208,12 @@ const Client = () => {
       </div>
 
       <AnimatePresence>
-        {isOpen && (
+        {isUpdateModalOpen && selectedClient && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={() => setUpdateModalOpen(false)}
             className="bg-slate-900/20 backdrop-blur px-4 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
           >
             <motion.div
@@ -194,7 +226,7 @@ const Client = () => {
               <div className="relative z-10 w-full grid gap-3">
                 <div className="w-full flex justify-end items-end">
                   <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setUpdateModalOpen(false)}
                     className="bg-[#3f3f3f] active:scale-95 text-white md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
                   >
                     <svg
@@ -220,8 +252,10 @@ const Client = () => {
                     type="text"
                     className="p-3 rounded-md text-black focus:outline-none"
                     placeholder="Client Name"
-                    value={clientUpdateName}
-                    onChange={(e) => setUpdateClientName(e.target.value)}
+                    value={updateData.name}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, name: e.target.value })
+                    }
                   />
                 </div>
 
@@ -232,8 +266,10 @@ const Client = () => {
                     type="text"
                     className="p-3 rounded-md text-black focus:outline-none"
                     placeholder="Client E-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={updateData.email}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, email: e.target.value })
+                    }
                   />
                 </div>
 
@@ -244,8 +280,10 @@ const Client = () => {
                     type="text"
                     className="p-3 rounded-md text-black focus:outline-none"
                     placeholder="Contact"
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
+                    value={updateData.contact}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, contact: e.target.value })
+                    }
                   />
                 </div>
 
@@ -255,8 +293,10 @@ const Client = () => {
                   <textarea
                     className="p-3 rounded-md text-black focus:outline-none"
                     placeholder="Address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    value={updateData.address}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, address: e.target.value })
+                    }
                   />
                 </div>
 
@@ -264,8 +304,10 @@ const Client = () => {
                 <div className="grid gap-2">
                   <span className="font-semibold">Client Category</span>
                   <select
-                    onChange={(e) => setCategory(e.target.value)}
-                    value={category}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, category: e.target.value })
+                    }
+                    value={updateData.category}
                     className="p-3 rounded-md text-black focus:outline-none"
                   >
                     <option value="Loyal">Loyal</option>
