@@ -44,7 +44,7 @@ const Navbar = () => {
             <Link onClick={() => setOpen(false)} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center" to={"/inventory"}>
               Inventory
             </Link>
-            <Link onClick={() => setOpen(false)} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center" to={"/client"}>
+            <Link onClick={() => setOpen(false)} className="active:scale-95 transform transition-all hover:bg-[#373737] w-fit p-3 rounded-xl text-center" to={"/"}>
               Client Management
             </Link>
             <Link

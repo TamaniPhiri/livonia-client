@@ -41,7 +41,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
         if (response.status === 200) {
           alert("CLient Created Successfully");
           setIsOpen(false);
-          window.location.href = "/client";
+          window.location.href = "/";
         }
       } catch (error) {
         console.log(error);

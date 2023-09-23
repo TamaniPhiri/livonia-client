@@ -1,64 +1,17 @@
+import { Link } from "react-router-dom";
+
 const Inventory = () => {
   return (
     <div className="flex items-center relative justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">Inventory</h1>
-      <div className="border-4 border-gray-700 mt-4 gap-4 p-4 md:p-8 lg:p-12 rounded-3xl flex flex-col items-center justify-center lg:max-w-2xl md:max-w-lg w-full bg-[#2b2b2b]">
-        <div className="flex flex-col gap-6 items-center justify-center w-full">
-          {/* Product Name and Brand */}
-          <div className="flex md:flex-row flex-col gap-4 w-full">
-            <div className="grid gap-2 md:w-1/2 w-full">
-              <span>Product Name</span>
-              <input
-                type="text"
-                placeholder="Name"
-                className=" p-3 rounded-md text-black focus:outline-none"
-              />
-            </div>
-
-            <div className="grid gap-2 md:w-1/2 w-full">
-              <span>Brand</span>
-              <input
-                type="text"
-                placeholder="Brand Name"
-                className=" p-3 rounded-md text-black focus:outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Size and Quantity */}
-          <div className="flex md:flex-row flex-col gap-4 w-full">
-            <div className="grid gap-2 md:w-1/2 w-full">
-              <span>Size</span>
-              <input
-                type="text"
-                placeholder="Size"
-                className=" p-3 rounded-md text-black focus:outline-none"
-              />
-            </div>
-
-            <div className="grid gap-2 md:w-1/2 w-full">
-              <span>Quantity</span>
-              <input
-                type="text"
-                placeholder="Quantity"
-                className=" p-3 rounded-md text-black focus:outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Price */}
-          <div className="flex flex-col gap-4 w-full">
-            <div className="grid gap-2  md:w-1/2 w-full">
-              <span>Price</span>
-              <input
-                type="text"
-                placeholder="Price"
-                className=" p-3 rounded-md text-black focus:outline-none"
-              />
-            </div>
-          </div>
-          <button className=" bg-blue-500 p-3 rounded-md w-full">Create</button>
-        </div>
+      <div className="grid grid-cols-2 gap-3 mt-6 text-center items-center justify-center">
+        <Link to={"/inventory/brakes"} className="p-3 bg-slate-800 rounded-md">Brakes</Link>
+        <Link to={"/inventory/tyres"} className="p-3 bg-slate-800 rounded-md">Tyres</Link>
+        <Link to={"/inventory/lubricants"} className="p-3 bg-slate-800 rounded-md">Lubricants</Link>
+        <Link to={"/inventory/batteries"} className="p-3 bg-slate-800 rounded-md">Batteries</Link>
+        <Link to={"/inventory/brake-shoes"} className="p-3 bg-slate-800 rounded-md">Brake Shoes</Link>
+        <Link to={"/inventory/brake-pads"} className="p-3 bg-slate-800 rounded-md">Brake Pads</Link>
+        <Link to={"/inventory/tubes"} className="p-3 bg-slate-800 rounded-md">Tubes</Link>
       </div>
     </div>
   );

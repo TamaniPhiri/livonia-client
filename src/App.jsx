@@ -6,15 +6,17 @@ import PaymentTracking from "./pages/PaymentTracking";
 import Navbar from "./components/Global/Navbar";
 import Login from "./pages/Login";
 import ClientTransactions from "./pages/ClientTransactions";
+import InventoryName from "./pages/InventoryName";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-      <Route path="/" Component={Client} />
+        <Route path="/" Component={Client} />
         <Route path="/inventory" Component={Inventory} />
-        <Route path="/client/transaction/:id" Component={ClientTransactions}/>
+        <Route path="/inventory/:name" Component={InventoryName} />
+        <Route path="/client/transaction/:id" Component={ClientTransactions} />
         <Route path="/payment-tracking" Component={PaymentTracking} />
         <Route path="/login" Component={Login} />
       </Routes>
