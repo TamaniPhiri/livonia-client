@@ -8,6 +8,7 @@ const ClientTransactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState("");
   useEffect(() => {
+    setError("")
     const getTransactions = async () => {
       try {
         const response = await axios.get(

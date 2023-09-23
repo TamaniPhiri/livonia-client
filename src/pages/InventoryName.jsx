@@ -5,14 +5,27 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const InventoryName = () => {
   const { name } = useParams();
+  const [selectedInventory, setSelectedInventory] = useState(null);
   const [inventory, setInventory] = useState([]);
+  const [updateData, setUpdateData] = useState({
+    quantity: "",
+    price: "",
+  });
+  const [clients, setClients] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [names, setNames] = useState("");
   const [error, setError] = useState("");
-  const[openTransaction,setOpenTransaction] = useState(false);
+  const [openTransaction, setOpenTransaction] = useState(false);
   const [brand, setBrand] = useState("");
+  const[brands,setBrands] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
+  const [amount, setAmount] = useState("");
+  const [newQuantityInput, setNewQuantityInput] = useState("");
   const formatDate = (createdAt) => {
     const formattedDate = new Date(createdAt).toLocaleDateString();
     const formattedTime = new Date(createdAt).toLocaleTimeString();
@@ -34,9 +47,10 @@ const InventoryName = () => {
     getInnventory();
   }, [name]);
 
-  const addInventory = async()=>{
+  const addInventory = async () => {
+    setError("");
     try {
-      const response = await axios.post('http://localhost:8000/inventory', {
+      const response = await axios.post("http://localhost:8000/inventory", {
         name: name,
         brand: brand,
         size: size,
@@ -53,7 +67,63 @@ const InventoryName = () => {
       console.log(error);
       setError("An error occurred");
     }
-  }
+  };
+  const handleClientSelect = (selectedClient) => {
+    setSelectedClientId(selectedClient.id);
+    setNames(selectedClient.name);
+    setBrands(selectedClient.brand);
+    setShowPopup(false); // Close the popup after selecting a client
+  };
+
+  const filteredClients = clients.filter((client) =>
+    client.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const addTransactions = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/transaction", {
+        clientId: selectedClientId,
+        name,
+        brand: brands,
+        quantity: newQuantityInput,
+        amount,
+      });
+      console.log(response);
+      // Handle the response as needed
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const postTransaction = () => {
+    addTransactions();
+  };
+
+  const handleUpdate = async (inventory) => {
+    setSelectedInventory(inventory);
+    setUpdateData({
+      quantity: inventory.quantity,
+      price: inventory.price,
+    });
+    console.log(updateData);
+    setOpenTransaction(true);
+  };
+
+  useEffect(() => {
+    // Fetch client names when the component mounts
+    const fetchClients = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/clients");
+        if (response.status === 200) {
+          setClients(response.data);
+          console.log(response); // Store client names in state
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchClients(); // Call the function to fetch client names
+  }, []);
   return (
     <div className="w-full justify-center items-center grid py-36 min-h-screen">
       <div className="w-full flex items-center justify-center">
@@ -64,6 +134,7 @@ const InventoryName = () => {
           Add {name}
         </button>
       </div>
+      {/* Client Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -162,7 +233,10 @@ const InventoryName = () => {
                 ) : null}
 
                 {/* Add client Button */}
-                <button onClick={addInventory} className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2">
+                <button
+                  onClick={addInventory}
+                  className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2"
+                >
                   Add inventory
                 </button>
               </div>
@@ -170,13 +244,15 @@ const InventoryName = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {openTransaction && (
+
+      {/* Inventory modal */}
+      {selectedInventory && openTransaction && (
+        <AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={() => setOpenTransaction(false)}
             className="bg-slate-900/20 backdrop-blur px-4 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
           >
             <motion.div
@@ -208,6 +284,45 @@ const InventoryName = () => {
                     </svg>
                   </button>
                 </div>
+                <div>
+                  {/* Client name */}
+                  <div className="grid gap-2 w-full">
+                    <span>Client Name</span>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="clientName"
+                        name="clientName"
+                        placeholder="Client Name"
+                        className="p-3 rounded-md text-black focus:outline-none"
+                        value={names}
+                        onChange={(e) => setNames(e.target.value)}
+                        onFocus={() => setShowPopup(true)} // Show the popup when the input is focused
+                      />
+                      {showPopup && (
+                        <div className="absolute top-0 z-30 left-0 w-full text-black border rounded-lg shadow-lg">
+                          <input
+                            type="text"
+                            placeholder="Search for a client"
+                            className="p-3 rounded-t-md w-full border border-slate-800 rounded "
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                          />
+                          <div className="max-h-60 overflow-y-auto bg-white">
+                            {filteredClients.map((client) => (
+                              <div
+                                key={client.id}
+                                className="p-3 cursor-pointer hover:bg-gray-100"
+                                onClick={() => handleClientSelect(client)}
+                              >
+                                <span id="client">{client.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
                 {/* Name */}
                 <div className="grid gap-2">
                   <span className="font-semibold">Name</span>
@@ -216,38 +331,27 @@ const InventoryName = () => {
 
                 {/* Brand */}
                 <div className="grid gap-2">
-                  <span className="font-semibold">Brand</span>
-                  <input
+                  <span className="font-semibold">Quantity in Stock</span>
+                  <span>{updateData.quantity}</span>
+                  {/* <input
                     type="text"
-                    className="p-3 rounded-md text-black focus:outline-none"
-                    placeholder="Brand"
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                    required
-                  />
-                </div>
-
-                {/* Size */}
-                <div className="grid gap-2">
-                  <span className="font-semibold">Size</span>
-                  <input
-                    type="text"
-                    className="p-3 rounded-md text-black focus:outline-none"
-                    placeholder="Size"
-                    value={size}
-                    onChange={(e) => setSize(e.target.value)}
-                    required
-                  />
-                </div>
-
-                {/* Quantity */}
-                <div className="grid gap-2">
-                  <span className="font-semibold">Quantity</span>
-                  <textarea
                     className="p-3 rounded-md text-black focus:outline-none"
                     placeholder="Quantity"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
+                    value={updateData.quantity}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, quantity: e.target.value })
+                    }
+                    required
+                  /> */}
+                </div>
+                <div className="grid gap-2">
+                  <span className="font-semibold">Required Quantity</span>
+                  <input
+                    type="text"
+                    className="p-3 rounded-md text-black focus:outline-none"
+                    placeholder="Quantity"
+                    value={newQuantityInput}
+                    onChange={(e) => setNewQuantityInput(e.target.value)}
                     required
                   />
                 </div>
@@ -256,9 +360,11 @@ const InventoryName = () => {
                 <div className="grid gap-2">
                   <span className="font-semibold">Price</span>
                   <input
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) =>
+                      setUpdateData({ ...updateData, price: e.target.value })
+                    }
                     required
-                    value={price}
+                    value={updateData.price}
                     className="p-3 rounded-md text-black focus:outline-none"
                   />
                 </div>
@@ -268,14 +374,17 @@ const InventoryName = () => {
                 ) : null}
 
                 {/* Add client Button */}
-                <button className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2">
-                  Add inventory
+                <button
+                  onClick={postTransaction}
+                  className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2"
+                >
+                  Update Inventory
                 </button>
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
 
       {inventory.length <= 0 ? (
         <span className="text-red-500">No {name} found</span>
@@ -290,20 +399,29 @@ const InventoryName = () => {
           <div>Price</div>
         </div>
         {inventory.map((item, index) => (
-            <div
-              key={index}
-              className=" grid md:grid-cols-7 capitalize grid-cols-1 gap-5 border w-full p-2"
-            >
-              <div>{formatDate(item.createdAt)}</div>
-              <div>{item.name}</div>
-              <div>{item.brand}</div>
-              <div>{item.quantity}</div>
-              <div>{item.size}</div>
-              <div>{item.price}</div>
-              <div><button className="px-2 py-2 bg-green-600 rounded">Transact</button></div>
+          <div
+            key={index}
+            className=" grid md:grid-cols-7 capitalize grid-cols-1 gap-5 border w-full p-2"
+          >
+            <div>{formatDate(item.createdAt)}</div>
+            <div>{item.name}</div>
+            <div>{item.brand}</div>
+            <div>{item.quantity}</div>
+            <div>{item.size}</div>
+            <div>{item.price}</div>
+            <div>
+              <button
+                onClick={() => {
+                  setError("");
+                  handleUpdate(item);
+                }}
+                className="px-2 py-2 bg-green-600 rounded"
+              >
+                Transact
+              </button>
             </div>
-          )
-        )}
+          </div>
+        ))}
         {error ? <span className="text-center w-full">{error}</span> : null}
       </div>
     </div>
