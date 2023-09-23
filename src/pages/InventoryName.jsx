@@ -8,6 +8,7 @@ const InventoryName = () => {
   const [inventory, setInventory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
+  const[openTransaction,setOpenTransaction] = useState(false);
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -162,6 +163,112 @@ const InventoryName = () => {
 
                 {/* Add client Button */}
                 <button onClick={addInventory} className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2">
+                  Add inventory
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {openTransaction && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="bg-slate-900/20 backdrop-blur px-4 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: "12.5deg" }}
+              animate={{ scale: 1, rotate: "0deg" }}
+              exit={{ scale: 0, rotate: "0deg" }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-[#2b2b2b] text-white p-3 md:p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+            >
+              <div className="relative z-10 w-full grid gap-3">
+                <div className="w-full flex justify-end items-end">
+                  <button
+                    onClick={() => setOpenTransaction(false)}
+                    className="bg-[#3f3f3f] active:scale-95 text-white md:p-3 p-2 mb-2 rounded-full text-3xl grid place-items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                {/* Name */}
+                <div className="grid gap-2">
+                  <span className="font-semibold">Name</span>
+                  <span className="py-3 capitalize">{name}</span>
+                </div>
+
+                {/* Brand */}
+                <div className="grid gap-2">
+                  <span className="font-semibold">Brand</span>
+                  <input
+                    type="text"
+                    className="p-3 rounded-md text-black focus:outline-none"
+                    placeholder="Brand"
+                    value={brand}
+                    onChange={(e) => setBrand(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {/* Size */}
+                <div className="grid gap-2">
+                  <span className="font-semibold">Size</span>
+                  <input
+                    type="text"
+                    className="p-3 rounded-md text-black focus:outline-none"
+                    placeholder="Size"
+                    value={size}
+                    onChange={(e) => setSize(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {/* Quantity */}
+                <div className="grid gap-2">
+                  <span className="font-semibold">Quantity</span>
+                  <textarea
+                    className="p-3 rounded-md text-black focus:outline-none"
+                    placeholder="Quantity"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {/* Price  */}
+                <div className="grid gap-2">
+                  <span className="font-semibold">Price</span>
+                  <input
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                    value={price}
+                    className="p-3 rounded-md text-black focus:outline-none"
+                  />
+                </div>
+
+                {error ? (
+                  <span className="text-red-500 font-semibold">{error}</span>
+                ) : null}
+
+                {/* Add client Button */}
+                <button className="w-full active:scale-95 transition-all transform font-semibold bg-green-600 rounded-md p-3 mt-2">
                   Add inventory
                 </button>
               </div>
