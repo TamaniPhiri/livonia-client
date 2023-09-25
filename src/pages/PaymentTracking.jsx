@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
 const PaymentTracking = () => {
+  const [selectedId, setSelectedId] = useState("");
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
   const [clients, setClients] = useState([]);
-  const[inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedClientId, setSelectedClientId] = useState("");
-  const [productTypes, setProductTypes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedInventory, setSelectedInventory] = useState("");
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -47,6 +52,14 @@ const PaymentTracking = () => {
     fetchInventory(); // Call the function to fetch client names
   }, []);
 
+  const handleInventoryClick = (item) => {
+    setSelectedId(item.id);
+    setSelectedInventory(item.name);
+    setBrand(item.brand);
+    setQuantity(item.quantity);
+    setIsModalOpen(false);
+  };
+
   const handleClientSelect = (selectedClient) => {
     setSelectedClientId(selectedClient.id);
     setName(selectedClient.name);
@@ -57,19 +70,38 @@ const PaymentTracking = () => {
     client.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const updateInventory = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/inventory/${selectedId}`,
+        {
+          quantity: otherQuantity,
+        }
+      );
+
+      if (response.status === 200) {
+        // Assuming that response.data contains the updated inventory data
+        setInventory(response.data); // Update the client-side inventory state
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addTransactions = async () => {
     try {
       const response = await axios.post("http://localhost:8000/transaction", {
         clientId: selectedClientId,
         name: name,
         brand: brand,
-        quantity: quantity,
+        quantity: otherQuantity,
         amount: amount,
       });
       console.log(response);
       setName("");
       setBrand("");
       setQuantity("");
+      setOtherQuantity("");
       setAmount("");
       // Handle the response as needed
     } catch (error) {
@@ -123,28 +155,71 @@ const PaymentTracking = () => {
               </div>
             )}
           </div>
+          <button
+            className="p-3 mt-4 bg-white w-full rounded text-gray-400 text-start px-3"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Open Inventory
+          </button>
         </div>
         <h1 className="col-span-2 w-full mt-4 font-semibold text-left">
           Product Details
         </h1>
 
         <div className="grid gap-6 border-b pb-6 border-gray-600 lg:grid-cols-2 w-full">
-          <select className="p-3 rounded-md text-black">
-            <option value="Tires">Tires</option>
-            <option value="Lubricants">Lubricants</option>
-            <option value="Batteries">Batteries</option>
-            <option value="Break Pads">Break Pads</option>
-            <option value="Break Shoes">Break Shoes</option>
-            <option value="Tubes">Tubes</option>
-            <option value="Filters">Filters</option>
-          </select>
+          <input
+            className="bg-white rounded text-black text-start px-3"
+            type="button"
+            placeholder="Open Inventory"
+            value={selectedInventory}
+          />
 
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            className="py-20 px-10 bg-white"
+            appElement={document.getElementById("root")}
+          >
+            <h2>Inventory</h2>
+            <div className="grid md:grid-cols-5 grid-cols-1 bg-gray-700 text-white py-2 px-2">
+              <div>Name</div>
+              <div>Brand</div>
+              <div>Size</div>
+              <div>Quantity</div>
+              <div>Price</div>
+            </div>
+            <ul>
+              {Array.isArray(inventory) && inventory.length > 0 ? (
+                inventory.map((item) => (
+                  <li
+                    className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
+                    key={item.id}
+                    onClick={() => handleInventoryClick(item)}
+                  >
+                    <p className="text-black">{item.name}</p>
+                    <p className="text-black">{item.brand}</p>
+                    <p className="text-black">{item.size}</p>
+                    <p className="text-black">{item.quantity}</p>
+                    <p className="text-black">{item.price}</p>
+                  </li>
+                ))
+              ) : (
+                <p>No inventory data available.</p>
+              )}
+            </ul>
+            <button
+              className="bg-black rounded py-2 px-2 mt-2"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Close
+            </button>
+          </Modal>
           {/* Brand */}
           <div className="grid">
             <input
               type="text"
               placeholder="Brand"
-              className=" p-3 rounded-md text-black focus:outline-none"
+              className="p-3 rounded-md text-black focus:outline-none"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
             />
@@ -155,12 +230,21 @@ const PaymentTracking = () => {
         {/* Payments */}
         <div className="col-span-2 w-full mt-4 gap-6 flex-col flex font-semibold text-left">
           <div className="grid gap-2">
-            <span>Quantity</span>
+            <span>In Stock</span>
             <input
               type="text"
               className=" p-3 rounded-md text-black focus:outline-none"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <span>Quantity</span>
+            <input
+              type="text"
+              className=" p-3 rounded-md text-black focus:outline-none"
+              value={otherQuantity}
+              onChange={(e) => setOtherQuantity(e.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -173,7 +257,10 @@ const PaymentTracking = () => {
             />
           </div>
           <button
-            onClick={postTransaction}
+            onClick={() => {
+              postTransaction();
+              updateInventory();
+            }}
             className="w-full bg-blue-500 p-3 rounded-md"
           >
             Record Payment
