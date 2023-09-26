@@ -92,7 +92,7 @@ const PaymentTracking = () => {
     try {
       const response = await axios.post("http://localhost:8000/transaction", {
         clientId: selectedClientId,
-        name: name,
+        product: selectedInventory,
         brand: brand,
         quantity: otherQuantity,
         amount: amount,
