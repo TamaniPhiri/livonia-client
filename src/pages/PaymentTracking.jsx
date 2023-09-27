@@ -113,6 +113,15 @@ const PaymentTracking = () => {
     addTransactions();
   };
 
+  const handleQuantityChange = (newQuantity) => {
+    const newItem = inventory.find(item => item.id === selectedId);
+
+    if (newItem) {
+      const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
+      setAmount(newAmount.toFixed(2));
+    }
+  };
+
   return (
     <div className="flex items-center justify-center w-full flex-col min-h-screen px-4 md:px-8 lg:px-12 py-32">
       <h1 className="font-bold uppercase text-2xl md:text-4xl">
@@ -189,27 +198,27 @@ const PaymentTracking = () => {
               <div>Price</div>
             </div>
             <ul>
-  {Array.isArray(inventory) && inventory.length > 0 ? (
-    inventory
-      .slice()
-      .reverse()
-      .map((item) => (
-        <li
-          className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
-          key={item.id}
-          onClick={() => handleInventoryClick(item)}
-        >
-          <p className="text-black">{item.name}</p>
-          <p className="text-black">{item.brand}</p>
-          <p className="text-black">{item.size}</p>
-          <p className="text-black">{item.quantity}</p>
-          <p className="text-black">{item.price}</p>
-        </li>
-      ))
-  ) : (
-    <p>No inventory data available.</p>
-  )}
-</ul>
+              {Array.isArray(inventory) && inventory.length > 0 ? (
+                inventory
+                  .slice()
+                  .reverse()
+                  .map((item) => (
+                    <li
+                      className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
+                      key={item.id}
+                      onClick={() => handleInventoryClick(item)}
+                    >
+                      <p className="text-black">{item.name}</p>
+                      <p className="text-black">{item.brand}</p>
+                      <p className="text-black">{item.size}</p>
+                      <p className="text-black">{item.quantity}</p>
+                      <p className="text-black">{item.price}</p>
+                    </li>
+                  ))
+              ) : (
+                <p>No inventory data available.</p>
+              )}
+            </ul>
 
             <button
               className="bg-black rounded py-2 px-2 mt-2"
@@ -243,23 +252,26 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Quantity</span>
-            <input
-              type="text"
-              className=" p-3 rounded-md text-black focus:outline-none"
-              value={otherQuantity}
-              onChange={(e) => setOtherQuantity(e.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <span>Amount Paid</span>
-            <input
-              type="text"
-              className=" p-3 rounded-md text-black focus:outline-none"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
+          <span>Quantity</span>
+          <input
+            type="text"
+            className="p-3 rounded-md text-black focus:outline-none"
+            value={otherQuantity}
+            onChange={(e) => {
+              setOtherQuantity(e.target.value);
+              handleQuantityChange(e.target.value);
+            }}
+          />
+        </div>
+        <div className="grid gap-2">
+          <span>Amount Paid</span>
+          <input
+            type="text"
+            className="p-3 rounded-md text-black focus:outline-none"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
           <button
             onClick={() => {
               postTransaction();
