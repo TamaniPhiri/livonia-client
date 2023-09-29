@@ -325,8 +325,10 @@ const PaymentTracking = () => {
                     <td className="border px-4 py-2">{item.quantity}</td>
                     <td className="border px-4 py-2">{item.amount}</td>
                     <td className="border px-4 py-2">
-        <button onClick={() => removeFromCart(index)}>Remove</button>
-      </td>
+                      <button className="py-2 px-2 bg-blue-500 text-white rounded" onClick={() => removeFromCart(index)}>
+                        Remove
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
