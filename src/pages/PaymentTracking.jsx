@@ -81,8 +81,7 @@ const PaymentTracking = () => {
       );
 
       if (response.status === 200) {
-        // Assuming that response.data contains the updated inventory data
-        setInventory(response.data); // Update the client-side inventory state
+        setInventory(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -115,20 +114,30 @@ const PaymentTracking = () => {
 
   const addTransactions = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/transaction", {
-        clientId: selectedClientId,
-        product: selectedInventory,
-        brand: brand,
-        quantity: otherQuantity,
-        amount: amount,
-      });
-      console.log(response);
-      setName("");
-      setBrand("");
-      setQuantity("");
-      setOtherQuantity("");
-      setAmount("");
-      // Handle the response as needed
+      if (cart.length > 0) {
+        const transactionData = cart.map((item) => ({
+          clientId: selectedClientId,
+          product: item.name,
+          brand: item.brand,
+          quantity: item.quantity,
+          amount: item.amount,
+        }));
+
+        const response = await axios.post(
+          "http://localhost:8000/transaction",
+          transactionData // Send an array of transaction data
+        );
+
+        console.log(response);
+
+        setCart([]);
+
+        setName("");
+        setBrand("");
+        setQuantity("");
+        setOtherQuantity("");
+        setAmount("");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -327,7 +336,10 @@ const PaymentTracking = () => {
                     <td className="border px-4 py-2">{item.quantity}</td>
                     <td className="border px-4 py-2">{item.amount}</td>
                     <td className="border px-4 py-2">
-                      <button className="py-2 px-2 bg-blue-500 text-white rounded" onClick={() => removeFromCart(index)}>
+                      <button
+                        className="py-2 px-2 bg-blue-500 text-white rounded"
+                        onClick={() => removeFromCart(index)}
+                      >
                         Remove
                       </button>
                     </td>
