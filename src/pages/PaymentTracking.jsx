@@ -262,7 +262,6 @@ const PaymentTracking = () => {
               onChange={(e) => setBrand(e.target.value)}
             />
           </div>
-          {/* Size */}
         </div>
 
         {/* Payments */}
@@ -272,6 +271,7 @@ const PaymentTracking = () => {
             <input
               type="text"
               className=" p-3 rounded-md text-black focus:outline-none"
+              placeholder="In Stock"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
@@ -281,6 +281,7 @@ const PaymentTracking = () => {
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Quantity"
               value={otherQuantity}
               onChange={(e) => {
                 setOtherQuantity(e.target.value);
@@ -293,6 +294,7 @@ const PaymentTracking = () => {
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
@@ -337,7 +339,7 @@ const PaymentTracking = () => {
                   <td colSpan="3" className="border px-4 py-2 font-bold">
                     Total:
                   </td>
-                  <td className="border px-4 py-2 font-bold">
+                  <td colSpan="2" className="border px-4 py-2 font-bold">
                     {cart
                       .reduce(
                         (total, item) => total + parseFloat(item.amount),
