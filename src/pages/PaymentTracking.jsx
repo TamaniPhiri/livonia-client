@@ -95,7 +95,7 @@ const PaymentTracking = () => {
         id: selectedId,
         name: selectedInventory,
         brand: brand,
-        amount:amount,
+        amount: amount,
         quantity: otherQuantity,
       };
       setCart([...cart, productToAdd]);
@@ -106,6 +106,11 @@ const PaymentTracking = () => {
       setOtherQuantity("");
       setSelectedInventory("");
     }
+  };
+  const removeFromCart = (indexToRemove) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(indexToRemove, 1);
+    setCart(updatedCart);
   };
 
   const addTransactions = async () => {
@@ -319,9 +324,27 @@ const PaymentTracking = () => {
                     <td className="border px-4 py-2">{item.brand}</td>
                     <td className="border px-4 py-2">{item.quantity}</td>
                     <td className="border px-4 py-2">{item.amount}</td>
+                    <td className="border px-4 py-2">
+        <button onClick={() => removeFromCart(index)}>Remove</button>
+      </td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="3" className="border px-4 py-2 font-bold">
+                    Total:
+                  </td>
+                  <td className="border px-4 py-2 font-bold">
+                    {cart
+                      .reduce(
+                        (total, item) => total + parseFloat(item.amount),
+                        0
+                      )
+                      .toFixed(2)}
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
 
