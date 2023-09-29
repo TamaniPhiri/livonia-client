@@ -95,12 +95,14 @@ const PaymentTracking = () => {
         id: selectedId,
         name: selectedInventory,
         brand: brand,
+        amount:amount,
         quantity: otherQuantity,
       };
       setCart([...cart, productToAdd]);
       setSelectedId("");
       setBrand("");
       setQuantity("");
+      setAmount("");
       setOtherQuantity("");
       setSelectedInventory("");
     }
@@ -301,27 +303,26 @@ const PaymentTracking = () => {
 
           <div className="grid gap-2">
             <span>Cart</span>
-            <div className="grid gap-2">
-              <span>Cart</span>
-              <table className="w-full table-auto text-black bg-white">
-                <thead>
-                  <tr>
-                    <th className="border px-4 py-2">Product</th>
-                    <th className="border px-4 py-2">Brand</th>
-                    <th className="border px-4 py-2">Quantity</th>
+            <table className="w-full table-auto text-black bg-white">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Product</th>
+                  <th className="border px-4 py-2">Brand</th>
+                  <th className="border px-4 py-2">Quantity</th>
+                  <th className="border px-4 py-2">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.map((item, index) => (
+                  <tr key={index}>
+                    <td className="border px-4 py-2">{item.name}</td>
+                    <td className="border px-4 py-2">{item.brand}</td>
+                    <td className="border px-4 py-2">{item.quantity}</td>
+                    <td className="border px-4 py-2">{item.amount}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {cart.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border px-4 py-2">{item.name}</td>
-                      <td className="border px-4 py-2">{item.brand}</td>
-                      <td className="border px-4 py-2">{item.quantity}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           <button
