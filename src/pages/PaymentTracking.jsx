@@ -272,6 +272,19 @@ const PaymentTracking = () => {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
+        <button
+            className="w-full bg-blue-500 p-3 rounded-md"
+          >
+            Add to Cart
+          </button>
+          <div className="grid gap-2">
+          <span>Cart</span>
+          <input
+            type="text"
+            className="p-6 rounded-md text-black focus:outline-none"
+            placeholder="cart"
+          />
+        </div>
           <button
             onClick={() => {
               postTransaction();
