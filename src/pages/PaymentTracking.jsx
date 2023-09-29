@@ -17,6 +17,7 @@ const PaymentTracking = () => {
   const [selectedClientId, setSelectedClientId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -88,6 +89,23 @@ const PaymentTracking = () => {
     }
   };
 
+  const addToCart = () => {
+    if (selectedId && otherQuantity && selectedInventory) {
+      const productToAdd = {
+        id: selectedId,
+        name: selectedInventory,
+        brand: brand,
+        quantity: otherQuantity,
+      };
+      setCart([...cart, productToAdd]);
+      setSelectedId("");
+      setBrand("");
+      setQuantity("");
+      setOtherQuantity("");
+      setSelectedInventory("");
+    }
+  };
+
   const addTransactions = async () => {
     try {
       const response = await axios.post("http://localhost:8000/transaction", {
@@ -114,7 +132,7 @@ const PaymentTracking = () => {
   };
 
   const handleQuantityChange = (newQuantity) => {
-    const newItem = inventory.find(item => item.id === selectedId);
+    const newItem = inventory.find((item) => item.id === selectedId);
 
     if (newItem) {
       const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
@@ -252,39 +270,60 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-          <span>Quantity</span>
-          <input
-            type="text"
-            className="p-3 rounded-md text-black focus:outline-none"
-            value={otherQuantity}
-            onChange={(e) => {
-              setOtherQuantity(e.target.value);
-              handleQuantityChange(e.target.value);
+            <span>Quantity</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              value={otherQuantity}
+              onChange={(e) => {
+                setOtherQuantity(e.target.value);
+                handleQuantityChange(e.target.value);
+              }}
+            />
+          </div>
+          <div className="grid gap-2">
+            <span>Amount Paid</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              addToCart();
             }}
-          />
-        </div>
-        <div className="grid gap-2">
-          <span>Amount Paid</span>
-          <input
-            type="text"
-            className="p-3 rounded-md text-black focus:outline-none"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-        <button
             className="w-full bg-blue-500 p-3 rounded-md"
           >
             Add to Cart
           </button>
+
           <div className="grid gap-2">
-          <span>Cart</span>
-          <input
-            type="text"
-            className="p-6 rounded-md text-black focus:outline-none"
-            placeholder="cart"
-          />
-        </div>
+            <span>Cart</span>
+            <div className="grid gap-2">
+              <span>Cart</span>
+              <table className="w-full table-auto text-black bg-white">
+                <thead>
+                  <tr>
+                    <th className="border px-4 py-2">Product</th>
+                    <th className="border px-4 py-2">Brand</th>
+                    <th className="border px-4 py-2">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.map((item, index) => (
+                    <tr key={index}>
+                      <td className="border px-4 py-2">{item.name}</td>
+                      <td className="border px-4 py-2">{item.brand}</td>
+                      <td className="border px-4 py-2">{item.quantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <button
             onClick={() => {
               postTransaction();
