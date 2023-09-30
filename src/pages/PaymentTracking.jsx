@@ -17,6 +17,7 @@ const PaymentTracking = () => {
   const [selectedClientId, setSelectedClientId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -80,30 +81,63 @@ const PaymentTracking = () => {
       );
 
       if (response.status === 200) {
-        // Assuming that response.data contains the updated inventory data
-        setInventory(response.data); // Update the client-side inventory state
+        setInventory(response.data);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const addTransactions = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/transaction", {
-        clientId: selectedClientId,
-        product: selectedInventory,
+  const addToCart = () => {
+    if (selectedId && otherQuantity && selectedInventory) {
+      const productToAdd = {
+        id: selectedId,
+        name: selectedInventory,
         brand: brand,
-        quantity: otherQuantity,
         amount: amount,
-      });
-      console.log(response);
-      setName("");
+        quantity: otherQuantity,
+      };
+      setCart([...cart, productToAdd]);
+      setSelectedId("");
       setBrand("");
       setQuantity("");
-      setOtherQuantity("");
       setAmount("");
-      // Handle the response as needed
+      setOtherQuantity("");
+      setSelectedInventory("");
+    }
+  };
+  const removeFromCart = (indexToRemove) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(indexToRemove, 1);
+    setCart(updatedCart);
+  };
+
+  const addTransactions = async () => {
+    try {
+      if (cart.length > 0) {
+        const transactionData = cart.map((item) => ({
+          clientId: selectedClientId,
+          product: item.name,
+          brand: item.brand,
+          quantity: item.quantity,
+          amount: item.amount,
+        }));
+
+        const response = await axios.post(
+          "http://localhost:8000/transaction",
+          transactionData // Send an array of transaction data
+        );
+
+        console.log(response);
+
+        setCart([]);
+
+        setName("");
+        setBrand("");
+        setQuantity("");
+        setOtherQuantity("");
+        setAmount("");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +148,7 @@ const PaymentTracking = () => {
   };
 
   const handleQuantityChange = (newQuantity) => {
-    const newItem = inventory.find(item => item.id === selectedId);
+    const newItem = inventory.find((item) => item.id === selectedId);
 
     if (newItem) {
       const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
@@ -237,7 +271,6 @@ const PaymentTracking = () => {
               onChange={(e) => setBrand(e.target.value)}
             />
           </div>
-          {/* Size */}
         </div>
 
         {/* Payments */}
@@ -247,31 +280,90 @@ const PaymentTracking = () => {
             <input
               type="text"
               className=" p-3 rounded-md text-black focus:outline-none"
+              placeholder="In Stock"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
           <div className="grid gap-2">
-          <span>Quantity</span>
-          <input
-            type="text"
-            className="p-3 rounded-md text-black focus:outline-none"
-            value={otherQuantity}
-            onChange={(e) => {
-              setOtherQuantity(e.target.value);
-              handleQuantityChange(e.target.value);
+            <span>Quantity</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Quantity"
+              value={otherQuantity}
+              onChange={(e) => {
+                setOtherQuantity(e.target.value);
+                handleQuantityChange(e.target.value);
+              }}
+            />
+          </div>
+          <div className="grid gap-2">
+            <span>Amount Paid</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              addToCart();
             }}
-          />
-        </div>
-        <div className="grid gap-2">
-          <span>Amount Paid</span>
-          <input
-            type="text"
-            className="p-3 rounded-md text-black focus:outline-none"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
+            className="w-full bg-blue-500 p-3 rounded-md"
+          >
+            Add to Cart
+          </button>
+
+          <div className="grid gap-2">
+            <span>Cart</span>
+            <table className="w-full table-auto text-black bg-white">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Product</th>
+                  <th className="border px-4 py-2">Brand</th>
+                  <th className="border px-4 py-2">Quantity</th>
+                  <th className="border px-4 py-2">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.map((item, index) => (
+                  <tr key={index}>
+                    <td className="border px-4 py-2">{item.name}</td>
+                    <td className="border px-4 py-2">{item.brand}</td>
+                    <td className="border px-4 py-2">{item.quantity}</td>
+                    <td className="border px-4 py-2">{item.amount}</td>
+                    <td className="border px-4 py-2">
+                      <button
+                        className="py-2 px-2 bg-blue-500 text-white rounded"
+                        onClick={() => removeFromCart(index)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="3" className="border px-4 py-2 font-bold">
+                    Total:
+                  </td>
+                  <td colSpan="2" className="border px-4 py-2 font-bold">
+                    {cart
+                      .reduce(
+                        (total, item) => total + parseFloat(item.amount),
+                        0
+                      )
+                      .toFixed(2)}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
           <button
             onClick={() => {
               postTransaction();
