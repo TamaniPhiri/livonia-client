@@ -1,5 +1,6 @@
-import { useEffect, useState , useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import jsPDF from "jspdf";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
@@ -20,7 +21,6 @@ const PaymentTracking = () => {
   const [cart, setCart] = useState([]);
 
   const totalFooterRef = useRef(null);
-
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -152,6 +152,8 @@ const PaymentTracking = () => {
         setQuantity("");
         setOtherQuantity("");
         setAmount("");
+
+        generatePDFReceipt(transactionData);
       }
     } catch (error) {
       console.log(error);
@@ -169,6 +171,30 @@ const PaymentTracking = () => {
       const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
       setAmount(newAmount.toFixed(2));
     }
+  };
+  const generatePDFReceipt = (transactionData) => {
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
+
+    // Customize your PDF receipt content here
+    doc.text("Receipt", 20, 20);
+    doc.text(`Client ID: ${transactionData.clientId}`, 20, 30);
+    doc.text(`Total Amount: ${transactionData.total}`, 20, 40);
+
+    // Add more transaction details as needed
+    if (transactionData.items.length > 0) {
+      let yPosition = 60;
+      transactionData.items.forEach((item) => {
+        doc.text(`Product: ${item.product}`, 20, yPosition);
+        doc.text(`Brand: ${item.brand}`, 20, yPosition + 10);
+        doc.text(`Quantity: ${item.quantity}`, 20, yPosition + 20);
+        doc.text(`Amount: ${item.amount}`, 20, yPosition + 30);
+        yPosition += 50;
+      });
+    }
+
+    // Save the PDF
+    doc.save("receipt.pdf");
   };
 
   return (
