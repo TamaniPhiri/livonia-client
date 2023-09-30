@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
@@ -18,7 +18,9 @@ const PaymentTracking = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState("");
+
+  const totalFooterRef = useRef(null);
+
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -123,8 +125,13 @@ const PaymentTracking = () => {
   const addTransactions = async () => {
     try {
       if (cart.length > 0) {
+        const calculatedTotal = cart.reduce(
+          (total, item) => total + parseFloat(item.amount),
+          0
+        );
         const transactionData = cart.map((item) => ({
           clientId: selectedClientId,
+          total: calculatedTotal.toFixed(2),
           product: item.name,
           brand: item.brand,
           quantity: item.quantity,
@@ -354,7 +361,7 @@ const PaymentTracking = () => {
                   </tr>
                 ))}
               </tbody>
-              <tfoot>
+              <tfoot ref={totalFooterRef}>
                 <tr>
                   <td colSpan="3" className="border px-4 py-2 font-bold">
                     Total:
