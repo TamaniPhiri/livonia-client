@@ -18,6 +18,7 @@ const PaymentTracking = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState("");
 
   useEffect(() => {
     // Fetch client names when the component mounts
@@ -64,27 +65,34 @@ const PaymentTracking = () => {
   const handleClientSelect = (selectedClient) => {
     setSelectedClientId(selectedClient.id);
     setName(selectedClient.name);
-    setShowPopup(false); // Close the popup after selecting a client
+    setShowPopup(false);
   };
 
   const filteredClients = clients.filter((client) =>
     client.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const updateInventory = async () => {
+  const updateInventory = async (cart) => {
     try {
-      const response = await axios.put(
-        `http://localhost:8000/inventory/${selectedId}`,
+      const productsToUpdate = cart.map((product) => ({
+        productId: product.id,
+        newQuantity: product.quantity,
+      }));
+
+      const response = await axios.post(
+        "http://localhost:8000/inventory/update",
         {
-          quantity: otherQuantity,
+          products: productsToUpdate,
         }
       );
 
       if (response.status === 200) {
-        setInventory(response.data);
+        console.log(response.data.message);
+      } else {
+        console.error("Failed to update inventory quantities");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error updating inventory quantities:", error);
     }
   };
 
@@ -125,7 +133,7 @@ const PaymentTracking = () => {
 
         const response = await axios.post(
           "http://localhost:8000/transaction",
-          transactionData // Send an array of transaction data
+          transactionData
         );
 
         console.log(response);
@@ -366,8 +374,8 @@ const PaymentTracking = () => {
 
           <button
             onClick={() => {
+              updateInventory(cart);
               postTransaction();
-              updateInventory();
             }}
             className="w-full bg-blue-500 p-3 rounded-md"
           >
