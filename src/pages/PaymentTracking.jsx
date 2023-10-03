@@ -11,6 +11,7 @@ const PaymentTracking = () => {
   const [quantity, setQuantity] = useState("");
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [clients, setClients] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -46,14 +47,14 @@ const PaymentTracking = () => {
         const response = await axios.get("http://localhost:8000/inventory");
         if (response.status === 200) {
           setInventory(response.data);
-          console.log(response); // Store client names in state
+          console.log(response);
         }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchInventory(); // Call the function to fetch client names
+    fetchInventory();
   }, []);
 
   const handleInventoryClick = (item) => {
@@ -403,6 +404,17 @@ const PaymentTracking = () => {
                 </tr>
               </tfoot>
             </table>
+          </div>
+          <div className="grid gap-2">
+            <span>Payment Method</span>
+            <select
+              className="p-3 rounded-md text-black focus:outline-none"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            >
+              <option value="cash">cash</option>
+              <option value="credit">credit</option>
+            </select>
           </div>
 
           <button

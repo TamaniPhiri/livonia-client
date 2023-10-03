@@ -29,31 +29,29 @@ const ClientTransactions = () => {
     const formattedTime = new Date(createdAt).toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
   };
-  const formatAmount = (amount) => {
-    // Use Number.parseFloat to ensure the amount is treated as a number
-    const formattedAmount = Number.parseFloat(amount).toLocaleString();
-    return formattedAmount;
-  };
+
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
-      <div className=" md:grid hidden text-lg font-bold grid-cols-5 gap-5 border rounded-t w-full p-2">
+      <div className=" md:grid hidden text-lg font-bold grid-cols-6 gap-5 border rounded-t w-full p-2">
         <div>Date</div>
         <div>Name</div>
         <div>Brand</div>
         <div>Quantity</div>
         <div>Amount</div>
+        <div>Payment</div>
       </div>
       {transactions.map((item, index) => {
         return(
         <div
           key={index}
-          className=" grid md:grid-cols-5 capitalize grid-cols-1 gap-5 border w-full p-2"
+          className=" grid md:grid-cols-6 capitalize grid-cols-1 gap-5 border w-full p-2"
         >
           <div>{formatDate(item.createdAt)}</div>
-          <div>{item.name}</div>
+          <div>{item.product}</div>
           <div>{item.brand}</div>
           <div>{item.quantity}</div>
           <div>{item.amount}</div>
+          <div>{item.payment}</div>
         </div>
         )
       })}

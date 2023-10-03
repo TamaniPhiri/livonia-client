@@ -7,6 +7,7 @@ import Navbar from "./components/Global/Navbar";
 import Login from "./pages/Login";
 import ClientTransactions from "./pages/ClientTransactions";
 import InventoryName from "./pages/InventoryName";
+import Creditors from "./pages/Creditors";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/inventory/:name" Component={InventoryName} />
         <Route path="/client/transaction/:id" Component={ClientTransactions} />
         <Route path="/payment-tracking" Component={PaymentTracking} />
+        <Route path="/creditors" Component={Creditors}/>
         <Route path="/login" Component={Login} />
       </Routes>
     </>
