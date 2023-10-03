@@ -11,6 +11,7 @@ const PaymentTracking = () => {
   const [quantity, setQuantity] = useState("");
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [clients, setClients] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -46,14 +47,14 @@ const PaymentTracking = () => {
         const response = await axios.get("http://localhost:8000/inventory");
         if (response.status === 200) {
           setInventory(response.data);
-          console.log(response); // Store client names in state
+          console.log(response);
         }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchInventory(); // Call the function to fetch client names
+    fetchInventory();
   }, []);
 
   const handleInventoryClick = (item) => {
@@ -136,6 +137,7 @@ const PaymentTracking = () => {
           brand: item.brand,
           quantity: item.quantity,
           amount: item.amount,
+          payment: paymentMethod,
         }));
 
         const response = await axios.post(
@@ -152,6 +154,7 @@ const PaymentTracking = () => {
         setQuantity("");
         setOtherQuantity("");
         setAmount("");
+        setPaymentMethod("");
 
         generatePDFReceipt(transactionData);
       }
@@ -404,7 +407,14 @@ const PaymentTracking = () => {
               </tfoot>
             </table>
           </div>
-
+          <select
+            className="p-3 rounded-md text-black focus:outline-none"
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <option value="cash">cash</option>
+            <option value="credit">credit</option>
+          </select>
           <button
             onClick={() => {
               updateInventory(cart);
