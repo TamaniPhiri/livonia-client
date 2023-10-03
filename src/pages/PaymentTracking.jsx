@@ -137,6 +137,7 @@ const PaymentTracking = () => {
           brand: item.brand,
           quantity: item.quantity,
           amount: item.amount,
+          payment: paymentMethod,
         }));
 
         const response = await axios.post(
@@ -153,6 +154,7 @@ const PaymentTracking = () => {
         setQuantity("");
         setOtherQuantity("");
         setAmount("");
+        setPaymentMethod("");
 
         generatePDFReceipt(transactionData);
       }
@@ -405,18 +407,14 @@ const PaymentTracking = () => {
               </tfoot>
             </table>
           </div>
-          <div className="grid gap-2">
-            <span>Payment Method</span>
-            <select
-              className="p-3 rounded-md text-black focus:outline-none"
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            >
-              <option value="cash">cash</option>
-              <option value="credit">credit</option>
-            </select>
-          </div>
-
+          <select
+            className="p-3 rounded-md text-black focus:outline-none"
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <option value="cash">cash</option>
+            <option value="credit">credit</option>
+          </select>
           <button
             onClick={() => {
               updateInventory(cart);
