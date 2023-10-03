@@ -38,6 +38,7 @@ const Creditors = () => {
 
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
+      <p className="py-3 text-lg font-bold">Creditors List</p>
       <div className=" md:grid hidden text-lg font-bold grid-cols-9 gap-5 border rounded-t w-full p-2">
         <div>Date</div>
         <div>Name</div>
