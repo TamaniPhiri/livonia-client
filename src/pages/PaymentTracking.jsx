@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
@@ -202,26 +203,27 @@ const PaymentTracking = () => {
       setAmount(newAmount.toFixed(2));
     }
   };
+
   const generatePDFReceipt = (transactionData) => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
 
     // Customize your PDF receipt content here
     doc.text("Receipt", 20, 20);
-    doc.text(`Client ID: ${transactionData.clientId}`, 20, 30);
-    doc.text(`Total Amount: ${transactionData.total}`, 20, 40);
+    doc.text(`Client ID: ${transactionData[0].clientId}`, 20, 30);
+    doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
 
-    // Add more transaction details as needed
-    if (transactionData.items.length > 0) {
-      let yPosition = 60;
-      transactionData.items.forEach((item) => {
-        doc.text(`Product: ${item.product}`, 20, yPosition);
-        doc.text(`Brand: ${item.brand}`, 20, yPosition + 10);
-        doc.text(`Quantity: ${item.quantity}`, 20, yPosition + 20);
-        doc.text(`Amount: ${item.amount}`, 20, yPosition + 30);
-        yPosition += 50;
-      });
-    }
+    // Create a table for transaction details using autoTable
+    doc.autoTable({
+      startY: 60,
+      head: [["Product", "Brand", "Quantity", "Amount"]],
+      body: transactionData.map((item) => [
+        item.product,
+        item.brand,
+        item.quantity,
+        item.amount,
+      ]),
+    });
 
     // Save the PDF
     doc.save("receipt.pdf");
