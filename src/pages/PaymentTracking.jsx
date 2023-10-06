@@ -291,7 +291,7 @@ const PaymentTracking = () => {
           <Modal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
-            className="py-20 px-10 bg-white"
+            className="py-20 px-10 bg-white "
             appElement={document.getElementById("root")}
           >
             <h2>Inventory</h2>
@@ -302,29 +302,30 @@ const PaymentTracking = () => {
               <div>Quantity</div>
               <div>Price</div>
             </div>
-            <ul>
-              {Array.isArray(inventory) && inventory.length > 0 ? (
-                inventory
-                  .slice()
-                  .reverse()
-                  .map((item) => (
-                    <li
-                      className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
-                      key={item.id}
-                      onClick={() => handleInventoryClick(item)}
-                    >
-                      <p className="text-black">{item.name}</p>
-                      <p className="text-black">{item.brand}</p>
-                      <p className="text-black">{item.size}</p>
-                      <p className="text-black">{item.quantity}</p>
-                      <p className="text-black">{item.price}</p>
-                    </li>
-                  ))
-              ) : (
-                <p>No inventory data available.</p>
-              )}
-            </ul>
-
+            <div className="h-[400px] overflow-y-auto">
+              <ul>
+                {Array.isArray(inventory) && inventory.length > 0 ? (
+                  inventory
+                    .slice()
+                    .reverse()
+                    .map((item) => (
+                      <li
+                        className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
+                        key={item.id}
+                        onClick={() => handleInventoryClick(item)}
+                      >
+                        <p className="text-black">{item.name}</p>
+                        <p className="text-black">{item.brand}</p>
+                        <p className="text-black">{item.size}</p>
+                        <p className="text-black">{item.quantity}</p>
+                        <p className="text-black">{item.price}</p>
+                      </li>
+                    ))
+                ) : (
+                  <p>No inventory data available.</p>
+                )}
+              </ul>
+            </div>
             <button
               className="bg-black rounded py-2 px-2 mt-2"
               onClick={() => setIsModalOpen(false)}
@@ -439,6 +440,7 @@ const PaymentTracking = () => {
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
+            <option>Select Payment</option>
             <option value="cash">cash</option>
             <option value="credit">credit</option>
           </select>
