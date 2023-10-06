@@ -3,6 +3,15 @@ import axios from "axios";
 
 const Creditors = () => {
   const [creditors, setCreditors] = useState([]);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  const openUpdatePopup = () => {
+    setShowUpdate(true);
+  };
+
+  const closeUpdatePopup = () => {
+    setShowUpdate(false);
+  };
 
   useEffect(() => {
     // Fetch creditors' names when the component mounts
@@ -61,10 +70,34 @@ const Creditors = () => {
               <div>{item.client.name}</div>
               <div>{item.client.contact}</div>
               <div>{item.balance}</div>
-              <div className="gap-4"><button className="py-2 px-2 bg-green-500 rounded">Update</button> <button className="py-2 px-3 bg-green-500 rounded">View</button></div>
+              <div className="gap-4">
+                <button
+                  onClick={openUpdatePopup}
+                  className="py-2 px-2 bg-green-500 rounded"
+                >
+                  Update
+                </button>{" "}
+                <button className="py-2 px-3 bg-green-500 rounded">View</button>
+              </div>
             </div>
           );
         })}
+      {showUpdate && (
+        <div className="absolute items-center justify-center bg-white w-[500px] px-6 py-6 rounded-lg">
+          <p className="text-black">Hello Welcome</p>
+          <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center">
+            <button className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex">
+              Submit
+            </button>
+            <button
+              className="w-full bg-green-500 text-white px-4 py-2 rounded-md flex"
+              onClick={closeUpdatePopup}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
