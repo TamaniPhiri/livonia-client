@@ -215,8 +215,9 @@ const PaymentTracking = () => {
     doc.setFontSize(11);
     doc.text(`Client Name: ${name}`, 20, 30);
     doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
-    doc.text(`Payment Type: ${transactionData[0].payment}`, 20, 50);
-    doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 60);
+    doc.text(`Payment Type: ${transactionData[0].payment}`, 80, 40);
+    doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 50);
+    doc.text(`Change: ${transactionData[0].balance}`, 80, 50);
     doc.text(`Balance: ${name}`, 20, 70);
 
     doc.autoTable({
