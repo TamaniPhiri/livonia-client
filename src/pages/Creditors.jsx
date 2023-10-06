@@ -39,12 +39,13 @@ const Creditors = () => {
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
       <p className="py-3 text-lg font-bold">Creditors List</p>
-      <div className=" md:grid hidden text-lg font-bold grid-cols-5 gap-5 border rounded-t w-full p-2">
+      <div className=" md:grid hidden text-lg font-bold grid-cols-6 gap-5 border rounded-t w-full p-2">
         <div>Date</div>
         <div>BatchId</div>
         <div>Name</div>
         <div>Contact</div>
         <div>Balance</div>
+        <div>Update</div>
       </div>
       {creditors
         .slice()
@@ -53,13 +54,14 @@ const Creditors = () => {
           return (
             <div
               key={index}
-              className="grid md:grid-cols-5 capitalize grid-cols-1 gap-5 border w-full p-2"
+              className="grid md:grid-cols-6 capitalize grid-cols-1 gap-5 border w-full p-2"
             >
               <div>{formatDate(item.createdAt)}</div>
               <div>{item.batchId}</div>
               <div>{item.client.name}</div>
               <div>{item.client.contact}</div>
               <div>{item.balance}</div>
+              <div className="gap-4"><button className="py-2 px-2 bg-green-500 rounded">Update</button> <button className="py-2 px-3 bg-green-500 rounded">View</button></div>
             </div>
           );
         })}
