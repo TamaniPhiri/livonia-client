@@ -134,8 +134,8 @@ const PaymentTracking = () => {
       return 0;
     }
 
-    const totalText = totalFooterRef.current.querySelector("td:last-child")
-      .textContent;
+    const totalText =
+      totalFooterRef.current.querySelector("td:last-child").textContent;
     const totalAmount = parseFloat(totalText);
 
     if (isNaN(totalAmount) || isNaN(parseFloat(amountTendered))) {
@@ -145,7 +145,6 @@ const PaymentTracking = () => {
     const balance = totalAmount - parseFloat(amountTendered);
     return balance.toFixed(2);
   };
-
 
   const addTransactions = async () => {
     try {
@@ -162,6 +161,8 @@ const PaymentTracking = () => {
           quantity: item.quantity,
           amount: item.amount,
           payment: paymentMethod,
+          amountTendered: amountTendered,
+          balance: balance,
         }));
 
         const response = await axios.post(
@@ -179,6 +180,8 @@ const PaymentTracking = () => {
         setOtherQuantity("");
         setAmount("");
         setPaymentMethod("");
+        setAmountTendered("");
+        setBalance("");
 
         generatePDFReceipt(transactionData);
       }
