@@ -12,6 +12,8 @@ const PaymentTracking = () => {
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [amountTendered, setAmountTendered] = useState("");
+  const [balance, setBalance] = useState(0);
   const [clients, setClients] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -30,18 +32,17 @@ const PaymentTracking = () => {
         const response = await axios.get("http://localhost:8000/clients");
         if (response.status === 200) {
           setClients(response.data);
-          console.log(response); // Store client names in state
+          console.log(response);
         }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchClients(); // Call the function to fetch client names
+    fetchClients();
   }, []);
 
   useEffect(() => {
-    // Fetch client names when the component mounts
     const fetchInventory = async () => {
       try {
         const response = await axios.get("http://localhost:8000/inventory");
@@ -122,6 +123,29 @@ const PaymentTracking = () => {
     updatedCart.splice(indexToRemove, 1);
     setCart(updatedCart);
   };
+
+  useEffect(() => {
+    const newBalance = calculateBalance();
+    setBalance(newBalance);
+  }, [amountTendered, cart]);
+
+  const calculateBalance = () => {
+    if (!totalFooterRef.current) {
+      return 0;
+    }
+
+    const totalText = totalFooterRef.current.querySelector("td:last-child")
+      .textContent;
+    const totalAmount = parseFloat(totalText);
+
+    if (isNaN(totalAmount) || isNaN(parseFloat(amountTendered))) {
+      return 0;
+    }
+
+    const balance = totalAmount - parseFloat(amountTendered);
+    return balance.toFixed(2);
+  };
+
 
   const addTransactions = async () => {
     try {
@@ -343,7 +367,7 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Amount Paid</span>
+            <span>Amount</span>
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
@@ -415,6 +439,31 @@ const PaymentTracking = () => {
             <option value="cash">cash</option>
             <option value="credit">credit</option>
           </select>
+          <div className="grid gap-2">
+            <span>Amount Tendered</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
+              value={amountTendered}
+              onChange={(e) => {
+                setAmountTendered(e.target.value);
+                const newBalance = calculateBalance();
+                setBalance(newBalance);
+              }}
+            />
+          </div>
+          <div className="grid gap-2">
+            <span>Balance</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
+              value={balance}
+              readOnly
+            />
+          </div>
+
           <button
             onClick={() => {
               updateInventory(cart);

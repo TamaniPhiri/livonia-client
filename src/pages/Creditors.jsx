@@ -50,25 +50,27 @@ const Creditors = () => {
         <div>Total</div>
         <div>Payment</div>
       </div>
-      {creditors.slice().reverse().map((item, index) => {
-  return (
-    <div
-      key={index}
-      className="grid md:grid-cols-9 capitalize grid-cols-1 gap-5 border w-full p-2"
-    >
-      <div>{formatDate(item.createdAt)}</div>
-      <div>{item.client.name}</div>
-      <div>{item.client.contact}</div>
-      <div>{item.product}</div>
-      <div>{item.brand}</div>
-      <div>{item.quantity}</div>
-      <div>{item.amount}</div>
-      <div>{item.total}</div>
-      <div>{item.payment}</div>
-    </div>
-  );
-})}
-
+      {creditors
+        .slice()
+        .reverse()
+        .map((item, index) => {
+          return (
+            <div
+              key={index}
+              className="grid md:grid-cols-9 capitalize grid-cols-1 gap-5 border w-full p-2"
+            >
+              <div>{formatDate(item.createdAt)}</div>
+              <div>{item.client.name}</div>
+              <div>{item.client.contact}</div>
+              <div>{item.product}</div>
+              <div>{item.brand}</div>
+              <div>{item.quantity}</div>
+              <div>{item.amount}</div>
+              <div>{item.total}</div>
+              <div>{item.payment}</div>
+            </div>
+          );
+        })}
     </div>
   );
 };
