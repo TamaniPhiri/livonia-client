@@ -208,12 +208,17 @@ const PaymentTracking = () => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
 
-    // Customize your PDF receipt content here
-    doc.text("Receipt", 20, 20);
-    doc.text(`Client ID: ${transactionData[0].clientId}`, 20, 30);
-    doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
+    doc.setFont("times");
+    doc.setFontSize(15);
 
-    // Create a table for transaction details using autoTable
+    doc.text("LIVONIA HARDWARE LTD.", 80, 20);
+    doc.setFontSize(11);
+    doc.text(`Client Name: ${name}`, 20, 30);
+    doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
+    doc.text(`Payment Type: ${transactionData[0].payment}`, 20, 50);
+    doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 60);
+    doc.text(`Balance: ${name}`, 20, 70);
+
     doc.autoTable({
       startY: 60,
       head: [["Product", "Brand", "Quantity", "Amount"]],
