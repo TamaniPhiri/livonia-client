@@ -310,7 +310,7 @@ const PaymentTracking = () => {
                     .reverse()
                     .map((item) => (
                       <li
-                        className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
+                        className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400 border border-black"
                         key={item.id}
                         onClick={() => handleInventoryClick(item)}
                       >
