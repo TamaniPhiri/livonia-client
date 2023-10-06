@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
@@ -12,6 +13,8 @@ const PaymentTracking = () => {
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [amountTendered, setAmountTendered] = useState("");
+  const [balance, setBalance] = useState(0);
   const [clients, setClients] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -30,18 +33,17 @@ const PaymentTracking = () => {
         const response = await axios.get("http://localhost:8000/clients");
         if (response.status === 200) {
           setClients(response.data);
-          console.log(response); // Store client names in state
+          console.log(response);
         }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchClients(); // Call the function to fetch client names
+    fetchClients();
   }, []);
 
   useEffect(() => {
-    // Fetch client names when the component mounts
     const fetchInventory = async () => {
       try {
         const response = await axios.get("http://localhost:8000/inventory");
@@ -123,6 +125,28 @@ const PaymentTracking = () => {
     setCart(updatedCart);
   };
 
+  useEffect(() => {
+    const newBalance = calculateBalance();
+    setBalance(newBalance);
+  }, [amountTendered, cart]);
+
+  const calculateBalance = () => {
+    if (!totalFooterRef.current) {
+      return 0;
+    }
+
+    const totalText =
+      totalFooterRef.current.querySelector("td:last-child").textContent;
+    const totalAmount = parseFloat(totalText);
+
+    if (isNaN(totalAmount) || isNaN(parseFloat(amountTendered))) {
+      return 0;
+    }
+
+    const balance = totalAmount - parseFloat(amountTendered);
+    return balance.toFixed(2);
+  };
+
   const addTransactions = async () => {
     try {
       if (cart.length > 0) {
@@ -138,6 +162,8 @@ const PaymentTracking = () => {
           quantity: item.quantity,
           amount: item.amount,
           payment: paymentMethod,
+          amountTendered: amountTendered,
+          balance: balance,
         }));
 
         const response = await axios.post(
@@ -155,6 +181,8 @@ const PaymentTracking = () => {
         setOtherQuantity("");
         setAmount("");
         setPaymentMethod("");
+        setAmountTendered("");
+        setBalance("");
 
         generatePDFReceipt(transactionData);
       }
@@ -175,26 +203,33 @@ const PaymentTracking = () => {
       setAmount(newAmount.toFixed(2));
     }
   };
+
   const generatePDFReceipt = (transactionData) => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
 
-    // Customize your PDF receipt content here
-    doc.text("Receipt", 20, 20);
-    doc.text(`Client ID: ${transactionData.clientId}`, 20, 30);
-    doc.text(`Total Amount: ${transactionData.total}`, 20, 40);
+    doc.setFont("times");
+    doc.setFontSize(15);
 
-    // Add more transaction details as needed
-    if (transactionData.items.length > 0) {
-      let yPosition = 60;
-      transactionData.items.forEach((item) => {
-        doc.text(`Product: ${item.product}`, 20, yPosition);
-        doc.text(`Brand: ${item.brand}`, 20, yPosition + 10);
-        doc.text(`Quantity: ${item.quantity}`, 20, yPosition + 20);
-        doc.text(`Amount: ${item.amount}`, 20, yPosition + 30);
-        yPosition += 50;
-      });
-    }
+    doc.text("LIVONIA HARDWARE LTD.", 80, 20);
+    doc.setFontSize(11);
+    doc.text(`Client Name: ${name}`, 20, 30);
+    doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
+    doc.text(`Payment Type: ${transactionData[0].payment}`, 80, 40);
+    doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 50);
+    doc.text(`Change: ${transactionData[0].balance}`, 80, 50);
+    doc.text(`Balance: ${name}`, 20, 70);
+
+    doc.autoTable({
+      startY: 60,
+      head: [["Product", "Brand", "Quantity", "Amount"]],
+      body: transactionData.map((item) => [
+        item.product,
+        item.brand,
+        item.quantity,
+        item.amount,
+      ]),
+    });
 
     // Save the PDF
     doc.save("receipt.pdf");
@@ -264,7 +299,7 @@ const PaymentTracking = () => {
           <Modal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
-            className="py-20 px-10 bg-white"
+            className="py-20 px-10 bg-white "
             appElement={document.getElementById("root")}
           >
             <h2>Inventory</h2>
@@ -275,29 +310,30 @@ const PaymentTracking = () => {
               <div>Quantity</div>
               <div>Price</div>
             </div>
-            <ul>
-              {Array.isArray(inventory) && inventory.length > 0 ? (
-                inventory
-                  .slice()
-                  .reverse()
-                  .map((item) => (
-                    <li
-                      className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400"
-                      key={item.id}
-                      onClick={() => handleInventoryClick(item)}
-                    >
-                      <p className="text-black">{item.name}</p>
-                      <p className="text-black">{item.brand}</p>
-                      <p className="text-black">{item.size}</p>
-                      <p className="text-black">{item.quantity}</p>
-                      <p className="text-black">{item.price}</p>
-                    </li>
-                  ))
-              ) : (
-                <p>No inventory data available.</p>
-              )}
-            </ul>
-
+            <div className="h-[400px] overflow-y-auto">
+              <ul>
+                {Array.isArray(inventory) && inventory.length > 0 ? (
+                  inventory
+                    .slice()
+                    .reverse()
+                    .map((item) => (
+                      <li
+                        className="grid md:grid-cols-5 grid-cols-1 cursor-pointer py-2 px-2 bg-gray-200 hover:bg-slate-400 border border-black"
+                        key={item.id}
+                        onClick={() => handleInventoryClick(item)}
+                      >
+                        <p className="text-black">{item.name}</p>
+                        <p className="text-black">{item.brand}</p>
+                        <p className="text-black">{item.size}</p>
+                        <p className="text-black">{item.quantity}</p>
+                        <p className="text-black">{item.price}</p>
+                      </li>
+                    ))
+                ) : (
+                  <p>No inventory data available.</p>
+                )}
+              </ul>
+            </div>
             <button
               className="bg-black rounded py-2 px-2 mt-2"
               onClick={() => setIsModalOpen(false)}
@@ -343,7 +379,7 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Amount Paid</span>
+            <span>Amount</span>
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
@@ -412,9 +448,35 @@ const PaymentTracking = () => {
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
+            <option>Select Payment</option>
             <option value="cash">cash</option>
             <option value="credit">credit</option>
           </select>
+          <div className="grid gap-2">
+            <span>Amount Tendered</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
+              value={amountTendered}
+              onChange={(e) => {
+                setAmountTendered(e.target.value);
+                const newBalance = calculateBalance();
+                setBalance(newBalance);
+              }}
+            />
+          </div>
+          <div className="grid gap-2">
+            <span>Balance</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="Amount"
+              value={balance}
+              readOnly
+            />
+          </div>
+
           <button
             onClick={() => {
               updateInventory(cart);
