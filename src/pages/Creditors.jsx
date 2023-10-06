@@ -4,6 +4,7 @@ import axios from "axios";
 const Creditors = () => {
   const [creditors, setCreditors] = useState([]);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState("credit");
 
   const openUpdatePopup = () => {
     setShowUpdate(true);
@@ -43,6 +44,10 @@ const Creditors = () => {
     const formattedDate = new Date(createdAt).toLocaleDateString();
     const formattedTime = new Date(createdAt).toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
+  };
+
+  const handlePaymentChange = (value) => {
+    setSelectedPayment(value);
   };
 
   return (
@@ -93,14 +98,18 @@ const Creditors = () => {
             />
           </div>
           <div>
-            <p>Name</p>
-            <input
+            <p>Status</p>
+            <select
               className="w-full py-2 border-2 border-gray-500 rounded"
-              placeholder="client name"
-            />
+              onChange={(e) => handlePaymentChange(e.target.value)}
+              value={selectedPayment}
+            >
+              <option value="credit">Credit</option>
+              <option value="settled">Settled</option>
+            </select>
           </div>
           <div>
-            <p>Name</p>
+            <p>Amount</p>
             <input
               className="w-full py-2 border-2 border-gray-500 rounded"
               placeholder="client name"
