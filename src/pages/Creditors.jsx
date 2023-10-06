@@ -83,9 +83,30 @@ const Creditors = () => {
           );
         })}
       {showUpdate && (
-        <div className="absolute items-center justify-center bg-white w-[500px] px-6 py-6 rounded-lg">
-          <p className="text-black">Hello Welcome</p>
-          <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center">
+        <div className="absolute items-center justify-center bg-white text-black w-[500px] px-6 py-6 rounded-lg">
+          <p className="text-black">Update Credit Status</p>
+          <div>
+            <p>Name</p>
+            <input
+              className="w-full py-2 border-2 border-gray-500 rounded"
+              placeholder="client name"
+            />
+          </div>
+          <div>
+            <p>Name</p>
+            <input
+              className="w-full py-2 border-2 border-gray-500 rounded"
+              placeholder="client name"
+            />
+          </div>
+          <div>
+            <p>Name</p>
+            <input
+              className="w-full py-2 border-2 border-gray-500 rounded"
+              placeholder="client name"
+            />
+          </div>
+          <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
             <button className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex">
               Submit
             </button>
