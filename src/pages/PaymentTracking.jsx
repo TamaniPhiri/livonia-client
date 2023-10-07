@@ -110,6 +110,7 @@ const PaymentTracking = () => {
         id: selectedId,
         name: selectedInventory,
         brand: brand,
+        discount: discount,
         amount: amount,
         quantity: otherQuantity,
       };
@@ -117,6 +118,7 @@ const PaymentTracking = () => {
       setSelectedId("");
       setBrand("");
       setQuantity("");
+      setDiscount("");
       setAmount("");
       setOtherQuantity("");
       setSelectedInventory("");
@@ -163,6 +165,7 @@ const PaymentTracking = () => {
           product: item.name,
           brand: item.brand,
           quantity: item.quantity,
+          discount: item.discount,
           amount: item.amount,
           payment: paymentMethod,
           amountTendered: amountTendered,
@@ -182,6 +185,7 @@ const PaymentTracking = () => {
         setBrand("");
         setQuantity("");
         setOtherQuantity("");
+        setDiscount("");
         setAmount("");
         setPaymentMethod("");
         setAmountTendered("");
@@ -203,8 +207,13 @@ const PaymentTracking = () => {
     const pricePerUnit = parseFloat(price);
     const quantityValue = parseFloat(newQuantity);
     const discountValue = parseFloat(newDiscount);
-  
-    if (newItem && !isNaN(pricePerUnit) && !isNaN(quantityValue) && !isNaN(discountValue)) {
+
+    if (
+      newItem &&
+      !isNaN(pricePerUnit) &&
+      !isNaN(quantityValue) &&
+      !isNaN(discountValue)
+    ) {
       const discountedPrice = pricePerUnit - discountValue;
       const newAmount = discountedPrice * quantityValue;
       setAmount(newAmount.toFixed(2));
@@ -212,7 +221,7 @@ const PaymentTracking = () => {
       setAmount(""); // Reset amount if any field is not valid
     }
   };
-  
+
   const generatePDFReceipt = (transactionData) => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
@@ -403,11 +412,11 @@ const PaymentTracking = () => {
               className="p-3 rounded-md text-black focus:outline-none"
               placeholder="discount"
               value={discount}
-  onChange={(e) => {
-    const newDiscount = e.target.value;
-    setDiscount(newDiscount);
-    calculateNewAmount(otherQuantity, newDiscount);
-  }}
+              onChange={(e) => {
+                const newDiscount = e.target.value;
+                setDiscount(newDiscount);
+                calculateNewAmount(otherQuantity, newDiscount);
+              }}
             />
           </div>
 
@@ -438,6 +447,7 @@ const PaymentTracking = () => {
                   <th className="border px-4 py-2">Product</th>
                   <th className="border px-4 py-2">Brand</th>
                   <th className="border px-4 py-2">Quantity</th>
+                  <th className="border px-4 py-2">Discount</th>
                   <th className="border px-4 py-2">Amount</th>
                 </tr>
               </thead>
@@ -447,6 +457,7 @@ const PaymentTracking = () => {
                     <td className="border px-4 py-2">{item.name}</td>
                     <td className="border px-4 py-2">{item.brand}</td>
                     <td className="border px-4 py-2">{item.quantity}</td>
+                    <td className="border px-4 py-2">{item.discount}</td>
                     <td className="border px-4 py-2">{item.amount}</td>
                     <td className="border px-4 py-2">
                       <button
