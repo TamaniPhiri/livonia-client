@@ -80,6 +80,9 @@ const InventoryName = () => {
       );
 
       if (response.status === 200) {
+        console.log("Inventory updated successfully");
+        console.log(response.data);
+        window.location.reload();
         closeUpdate();
       }
     } catch (error) {
