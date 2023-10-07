@@ -211,7 +211,7 @@ const PaymentTracking = () => {
     doc.setFont("times");
     doc.setFontSize(15);
 
-    doc.text("LIVONIA HARDWARE LTD.", 80, 20);
+    doc.text("LIVONIA INVESTMENTS LTD.", 80, 20);
     doc.setFontSize(11);
     doc.text(`Client Name: ${name}`, 20, 30);
     doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
