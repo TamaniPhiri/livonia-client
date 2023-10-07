@@ -236,10 +236,10 @@ const PaymentTracking = () => {
     doc.text(`Payment Type: ${transactionData[0].payment}`, 80, 40);
     doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 50);
     doc.text(`Balance: ${transactionData[0].balance}`, 80, 50);
-    
+
     doc.autoTable({
       startY: 70,
-      head: [["Product", "Brand", "Quantity","Discount", "Amount"]],
+      head: [["Product", "Brand", "Quantity", "Discount", "Amount"]],
       body: transactionData.map((item) => [
         item.product,
         item.brand,
@@ -247,9 +247,9 @@ const PaymentTracking = () => {
         item.discount,
         item.amount,
       ]),
+      startX: 30,
     });
 
-    // Save the PDF
     doc.save("receipt.pdf");
   };
 
