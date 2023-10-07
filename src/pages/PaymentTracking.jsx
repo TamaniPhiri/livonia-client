@@ -9,6 +9,7 @@ const PaymentTracking = () => {
   const [selectedId, setSelectedId] = useState("");
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
@@ -23,6 +24,7 @@ const PaymentTracking = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
   const [cart, setCart] = useState([]);
+  const [discount, setDiscount] = useState("");
 
   const totalFooterRef = useRef(null);
 
@@ -63,6 +65,7 @@ const PaymentTracking = () => {
     setSelectedId(item.id);
     setSelectedInventory(item.name);
     setBrand(item.brand);
+    setPrice(item.price);
     setQuantity(item.quantity);
     setIsModalOpen(false);
   };
@@ -107,6 +110,7 @@ const PaymentTracking = () => {
         id: selectedId,
         name: selectedInventory,
         brand: brand,
+        discount: discount,
         amount: amount,
         quantity: otherQuantity,
       };
@@ -114,6 +118,7 @@ const PaymentTracking = () => {
       setSelectedId("");
       setBrand("");
       setQuantity("");
+      setDiscount("");
       setAmount("");
       setOtherQuantity("");
       setSelectedInventory("");
@@ -160,6 +165,7 @@ const PaymentTracking = () => {
           product: item.name,
           brand: item.brand,
           quantity: item.quantity,
+          discount: item.discount,
           amount: item.amount,
           payment: paymentMethod,
           amountTendered: amountTendered,
@@ -179,6 +185,7 @@ const PaymentTracking = () => {
         setBrand("");
         setQuantity("");
         setOtherQuantity("");
+        setDiscount("");
         setAmount("");
         setPaymentMethod("");
         setAmountTendered("");
@@ -195,12 +202,23 @@ const PaymentTracking = () => {
     addTransactions();
   };
 
-  const handleQuantityChange = (newQuantity) => {
+  const calculateNewAmount = (newQuantity, newDiscount) => {
     const newItem = inventory.find((item) => item.id === selectedId);
+    const pricePerUnit = parseFloat(price);
+    const quantityValue = parseFloat(newQuantity);
+    const discountValue = parseFloat(newDiscount);
 
-    if (newItem) {
-      const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
+    if (
+      newItem &&
+      !isNaN(pricePerUnit) &&
+      !isNaN(quantityValue) &&
+      !isNaN(discountValue)
+    ) {
+      const discountedPrice = pricePerUnit - discountValue;
+      const newAmount = discountedPrice * quantityValue;
       setAmount(newAmount.toFixed(2));
+    } else {
+      setAmount(""); // Reset amount if any field is not valid
     }
   };
 
@@ -217,21 +235,21 @@ const PaymentTracking = () => {
     doc.text(`Total Amount: ${transactionData[0].total}`, 20, 40);
     doc.text(`Payment Type: ${transactionData[0].payment}`, 80, 40);
     doc.text(`Amount Tendered: ${transactionData[0].amountTendered}`, 20, 50);
-    doc.text(`Change: ${transactionData[0].balance}`, 80, 50);
-    doc.text(`Balance: ${name}`, 20, 70);
+    doc.text(`Balance: ${transactionData[0].balance}`, 80, 50);
 
     doc.autoTable({
-      startY: 60,
-      head: [["Product", "Brand", "Quantity", "Amount"]],
+      startY: 70,
+      head: [["Product", "Brand", "Quantity", "Discount", "Amount"]],
       body: transactionData.map((item) => [
         item.product,
         item.brand,
         item.quantity,
+        item.discount,
         item.amount,
       ]),
+      startX: 30,
     });
 
-    // Save the PDF
     doc.save("receipt.pdf");
   };
 
@@ -253,7 +271,7 @@ const PaymentTracking = () => {
               className="p-3 rounded-md text-black focus:outline-none"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              onFocus={() => setShowPopup(true)} // Show the popup when the input is focused
+              onFocus={() => setShowPopup(true)}
             />
             {showPopup && (
               <div className="absolute top-0 left-0 w-full bg-white border rounded-lg shadow-lg">
@@ -366,18 +384,42 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Quantity</span>
+            <span>Price Per Unit</span>
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
-              placeholder="Quantity"
-              value={otherQuantity}
+              placeholder="Amount"
+              value={price}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+          <span>Quantity</span>
+          <input
+            type="text"
+            className="p-3 rounded-md text-black focus:outline-none"
+            placeholder="Quantity"
+            value={otherQuantity}
+            onChange={(e) => {
+              const newQuantity = e.target.value;
+              setOtherQuantity(newQuantity);
+              calculateNewAmount(newQuantity, discount);
+            }}
+          />
+          <div className="grid gap-2">
+            <span>Discount</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="discount"
+              value={discount}
               onChange={(e) => {
-                setOtherQuantity(e.target.value);
-                handleQuantityChange(e.target.value);
+                const newDiscount = e.target.value;
+                setDiscount(newDiscount);
+                calculateNewAmount(otherQuantity, newDiscount);
               }}
             />
           </div>
+
           <div className="grid gap-2">
             <span>Amount</span>
             <input
@@ -405,6 +447,7 @@ const PaymentTracking = () => {
                   <th className="border px-4 py-2">Product</th>
                   <th className="border px-4 py-2">Brand</th>
                   <th className="border px-4 py-2">Quantity</th>
+                  <th className="border px-4 py-2">Discount</th>
                   <th className="border px-4 py-2">Amount</th>
                 </tr>
               </thead>
@@ -414,6 +457,7 @@ const PaymentTracking = () => {
                     <td className="border px-4 py-2">{item.name}</td>
                     <td className="border px-4 py-2">{item.brand}</td>
                     <td className="border px-4 py-2">{item.quantity}</td>
+                    <td className="border px-4 py-2">{item.discount}</td>
                     <td className="border px-4 py-2">{item.amount}</td>
                     <td className="border px-4 py-2">
                       <button
