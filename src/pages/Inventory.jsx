@@ -9,8 +9,6 @@ const Inventory = () => {
         <Link to={"/inventory/tyres"} className="p-3 bg-slate-800 rounded-md">Tyres</Link>
         <Link to={"/inventory/lubricants"} className="p-3 bg-slate-800 rounded-md">Lubricants</Link>
         <Link to={"/inventory/batteries"} className="p-3 bg-slate-800 rounded-md">Batteries</Link>
-        <Link to={"/inventory/brake-shoes"} className="p-3 bg-slate-800 rounded-md">Brake Shoes</Link>
-        <Link to={"/inventory/brake-pads"} className="p-3 bg-slate-800 rounded-md">Brake Pads</Link>
         <Link to={"/inventory/tubes"} className="p-3 bg-slate-800 rounded-md">Tubes</Link>
         <Link to={"/inventory/filters"} className="p-3 bg-slate-800 rounded-md">Filters</Link>
       </div>
