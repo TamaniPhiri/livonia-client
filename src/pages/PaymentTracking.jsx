@@ -9,6 +9,7 @@ const PaymentTracking = () => {
   const [selectedId, setSelectedId] = useState("");
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [otherQuantity, setOtherQuantity] = useState("");
   const [amount, setAmount] = useState("");
@@ -23,6 +24,7 @@ const PaymentTracking = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInventory, setSelectedInventory] = useState("");
   const [cart, setCart] = useState([]);
+  const [discount, setDiscount] = useState("");
 
   const totalFooterRef = useRef(null);
 
@@ -63,6 +65,7 @@ const PaymentTracking = () => {
     setSelectedId(item.id);
     setSelectedInventory(item.name);
     setBrand(item.brand);
+    setPrice(item.price);
     setQuantity(item.quantity);
     setIsModalOpen(false);
   };
@@ -195,15 +198,21 @@ const PaymentTracking = () => {
     addTransactions();
   };
 
-  const handleQuantityChange = (newQuantity) => {
+  const calculateNewAmount = (newQuantity, newDiscount) => {
     const newItem = inventory.find((item) => item.id === selectedId);
-
-    if (newItem) {
-      const newAmount = parseFloat(newItem.price) * parseFloat(newQuantity);
+    const pricePerUnit = parseFloat(price);
+    const quantityValue = parseFloat(newQuantity);
+    const discountValue = parseFloat(newDiscount);
+  
+    if (newItem && !isNaN(pricePerUnit) && !isNaN(quantityValue) && !isNaN(discountValue)) {
+      const discountedPrice = pricePerUnit - discountValue;
+      const newAmount = discountedPrice * quantityValue;
       setAmount(newAmount.toFixed(2));
+    } else {
+      setAmount(""); // Reset amount if any field is not valid
     }
   };
-
+  
   const generatePDFReceipt = (transactionData) => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
@@ -253,7 +262,7 @@ const PaymentTracking = () => {
               className="p-3 rounded-md text-black focus:outline-none"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              onFocus={() => setShowPopup(true)} // Show the popup when the input is focused
+              onFocus={() => setShowPopup(true)}
             />
             {showPopup && (
               <div className="absolute top-0 left-0 w-full bg-white border rounded-lg shadow-lg">
@@ -366,18 +375,42 @@ const PaymentTracking = () => {
             />
           </div>
           <div className="grid gap-2">
-            <span>Quantity</span>
+            <span>Price Per Unit</span>
             <input
               type="text"
               className="p-3 rounded-md text-black focus:outline-none"
-              placeholder="Quantity"
-              value={otherQuantity}
-              onChange={(e) => {
-                setOtherQuantity(e.target.value);
-                handleQuantityChange(e.target.value);
-              }}
+              placeholder="Amount"
+              value={price}
+              onChange={(e) => setAmount(e.target.value)}
             />
           </div>
+          <span>Quantity</span>
+          <input
+            type="text"
+            className="p-3 rounded-md text-black focus:outline-none"
+            placeholder="Quantity"
+            value={otherQuantity}
+            onChange={(e) => {
+              const newQuantity = e.target.value;
+              setOtherQuantity(newQuantity);
+              calculateNewAmount(newQuantity, discount);
+            }}
+          />
+          <div className="grid gap-2">
+            <span>Discount</span>
+            <input
+              type="text"
+              className="p-3 rounded-md text-black focus:outline-none"
+              placeholder="discount"
+              value={discount}
+  onChange={(e) => {
+    const newDiscount = e.target.value;
+    setDiscount(newDiscount);
+    calculateNewAmount(otherQuantity, newDiscount);
+  }}
+            />
+          </div>
+
           <div className="grid gap-2">
             <span>Amount</span>
             <input
