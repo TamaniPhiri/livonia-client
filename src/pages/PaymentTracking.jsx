@@ -239,12 +239,13 @@ const PaymentTracking = () => {
     doc.text(`Balance: ${name}`, 20, 70);
 
     doc.autoTable({
-      startY: 60,
+      startY: 90,
       head: [["Product", "Brand", "Quantity", "Amount"]],
       body: transactionData.map((item) => [
         item.product,
         item.brand,
         item.quantity,
+        item.discount,
         item.amount,
       ]),
     });
