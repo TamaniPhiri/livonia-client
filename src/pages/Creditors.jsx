@@ -85,17 +85,21 @@ const Creditors = () => {
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
       <p className="py-3 text-lg font-bold">Creditors List</p>
-      <div className=" md:grid hidden text-lg font-bold grid-cols-8 gap-5 border rounded-t w-full p-2">
-        <div>Date</div>
-        <div>BatchId</div>
-        <div>Name</div>
-        <div>Contact</div>
-        <div>Total</div>
-        <div>Product</div>
-        <div>Balance</div>
-        <div>Update</div>
-      </div>
-      {creditors
+      {creditors.length === 0 ? (
+        <p className="text-lg">No creditors found.</p>
+      ) : (
+        <div className=" md:grid hidden text-lg font-bold grid-cols-8 gap-5 border rounded-t w-full p-2">
+          <div>Date</div>
+          <div>BatchId</div>
+          <div>Name</div>
+          <div>Contact</div>
+          <div>Total</div>
+          <div>Product</div>
+          <div>Balance</div>
+          <div>Update</div>
+        </div>
+      )}
+      {creditors.length > 0 && creditors
         .slice()
         .reverse()
         .map((item, index) => {

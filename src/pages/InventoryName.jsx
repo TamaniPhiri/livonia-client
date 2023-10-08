@@ -8,12 +8,13 @@ const InventoryName = () => {
   const [inventory, setInventory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
+  const [brands, setBrands] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [updateQuantity, setUpdateQuantity] = useState(false);
-  const [newQuantity,setNewQuantity] = useState("");
+  const [newQuantity, setNewQuantity] = useState("");
   const [inventoryToUpdate, setInventoryToUpdate] = useState(null);
   const formatDate = (createdAt) => {
     const formattedDate = new Date(createdAt).toLocaleDateString();
@@ -70,20 +71,21 @@ const InventoryName = () => {
   const updateInventory = async () => {
     if (!inventoryToUpdate) return;
     const data = {
-      quantity:newQuantity,
+      quantity: newQuantity,
+      brand: brands,
     };
 
     try {
       const response = await axios.put(
         `http://localhost:8000/inventory/update/${inventoryToUpdate.id}`,
-        data,
+        data
       );
 
       if (response.status === 200) {
         console.log("Inventory updated successfully");
         console.log(response.data);
-        window.location.reload();
         closeUpdate();
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
@@ -252,11 +254,24 @@ const InventoryName = () => {
                 placeholder="quantity"
                 type="number"
                 value={newQuantity}
-              onChange={(e) => setNewQuantity(e.target.value)}
+                onChange={(e) => setNewQuantity(e.target.value)}
+              />
+            </div>
+            <div className="py-3">
+              <p>Brand</p>
+              <input
+                className="w-full py-2 border-2 border-gray-500 rounded"
+                placeholder="brand"
+                type="text"
+                value={brands}
+                onChange={(e) => setBrands(e.target.value)}
               />
             </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
-              <button onClick={updateInventory} className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex">
+              <button
+                onClick={updateInventory}
+                className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex"
+              >
                 Submit
               </button>
               <button
