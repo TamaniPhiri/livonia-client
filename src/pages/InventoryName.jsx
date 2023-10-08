@@ -8,6 +8,7 @@ const InventoryName = () => {
   const [inventory, setInventory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
+  const [brands, setBrands] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -71,7 +72,7 @@ const InventoryName = () => {
     if (!inventoryToUpdate) return;
     const data = {
       quantity: newQuantity,
-      brand: brand,
+      brand: brands,
     };
 
     try {
@@ -83,8 +84,8 @@ const InventoryName = () => {
       if (response.status === 200) {
         console.log("Inventory updated successfully");
         console.log(response.data);
-        window.location.reload();
         closeUpdate();
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
@@ -261,9 +262,9 @@ const InventoryName = () => {
               <input
                 className="w-full py-2 border-2 border-gray-500 rounded"
                 placeholder="brand"
-                type="number"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                type="text"
+                value={brands}
+                onChange={(e) => setBrands(e.target.value)}
               />
             </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
