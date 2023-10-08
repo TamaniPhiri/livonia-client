@@ -13,7 +13,7 @@ const InventoryName = () => {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [updateQuantity, setUpdateQuantity] = useState(false);
-  const [newQuantity,setNewQuantity] = useState("");
+  const [newQuantity, setNewQuantity] = useState("");
   const [inventoryToUpdate, setInventoryToUpdate] = useState(null);
   const formatDate = (createdAt) => {
     const formattedDate = new Date(createdAt).toLocaleDateString();
@@ -70,13 +70,14 @@ const InventoryName = () => {
   const updateInventory = async () => {
     if (!inventoryToUpdate) return;
     const data = {
-      quantity:newQuantity,
+      quantity: newQuantity,
+      brand: brand,
     };
 
     try {
       const response = await axios.put(
         `http://localhost:8000/inventory/update/${inventoryToUpdate.id}`,
-        data,
+        data
       );
 
       if (response.status === 200) {
@@ -252,11 +253,24 @@ const InventoryName = () => {
                 placeholder="quantity"
                 type="number"
                 value={newQuantity}
-              onChange={(e) => setNewQuantity(e.target.value)}
+                onChange={(e) => setNewQuantity(e.target.value)}
+              />
+            </div>
+            <div className="py-3">
+              <p>Brand</p>
+              <input
+                className="w-full py-2 border-2 border-gray-500 rounded"
+                placeholder="brand"
+                type="number"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
               />
             </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
-              <button onClick={updateInventory} className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex">
+              <button
+                onClick={updateInventory}
+                className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex"
+              >
                 Submit
               </button>
               <button
