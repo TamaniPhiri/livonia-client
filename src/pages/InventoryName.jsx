@@ -261,7 +261,6 @@ const InventoryName = () => {
                 className="w-full py-2 border-2 border-gray-500 rounded"
                 placeholder="brand"
                 type="text"
-                value={brands}
                 onChange={(e) => setBrands(e.target.value)}
               />
             </div>
