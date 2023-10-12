@@ -255,14 +255,6 @@ const InventoryName = () => {
                 onChange={(e) => setNewQuantity(e.target.value)}
               />
             </div>
-            <div className="py-3">
-              <p>Brand</p>
-              <input
-                className="w-full py-2 border-2 border-gray-500 rounded"
-                placeholder="brand"
-                type="text"
-              />
-            </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
               <button
                 onClick={updateInventory}
