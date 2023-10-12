@@ -8,7 +8,6 @@ const InventoryName = () => {
   const [inventory, setInventory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
-  const [brands, setBrands] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -72,7 +71,6 @@ const InventoryName = () => {
     if (!inventoryToUpdate) return;
     const data = {
       quantity: newQuantity,
-      brand: brands,
     };
 
     try {
@@ -238,7 +236,7 @@ const InventoryName = () => {
                 onClick={() => openUpdate(item)}
                 className="px-2 py-2 bg-green-600 rounded"
               >
-                Update
+                Quantity
               </button>
             </div>
           </div>
@@ -255,16 +253,6 @@ const InventoryName = () => {
                 type="number"
                 value={newQuantity}
                 onChange={(e) => setNewQuantity(e.target.value)}
-              />
-            </div>
-            <div className="py-3">
-              <p>Brand</p>
-              <input
-                className="w-full py-2 border-2 border-gray-500 rounded"
-                placeholder="brand"
-                type="text"
-                value={brands}
-                onChange={(e) => setBrands(e.target.value)}
               />
             </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
