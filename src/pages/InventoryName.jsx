@@ -8,7 +8,6 @@ const InventoryName = () => {
   const [inventory, setInventory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
-  const [brands, setBrands] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
