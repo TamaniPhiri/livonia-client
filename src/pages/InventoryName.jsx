@@ -261,7 +261,6 @@ const InventoryName = () => {
                 className="w-full py-2 border-2 border-gray-500 rounded"
                 placeholder="brand"
                 type="text"
-                onChange={(e) => setBrands(e.target.value)}
               />
             </div>
             <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
