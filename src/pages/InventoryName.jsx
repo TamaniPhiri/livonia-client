@@ -72,7 +72,6 @@ const InventoryName = () => {
     if (!inventoryToUpdate) return;
     const data = {
       quantity: newQuantity,
-      brand: brands,
     };
 
     try {
