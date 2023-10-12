@@ -236,7 +236,7 @@ const InventoryName = () => {
                 onClick={() => openUpdate(item)}
                 className="px-2 py-2 bg-green-600 rounded"
               >
-                Update
+                Quantity
               </button>
             </div>
           </div>
