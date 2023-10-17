@@ -247,7 +247,7 @@ const InventoryName = () => {
       </AnimatePresence>
 
       <div className="items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
-        <div className=" md:grid mt-4 hidden text-lg font-bold grid-cols-8 gap-5 border rounded-t w-full p-2">
+        <div className=" md:grid mt-4 hidden text-lg font-bold grid-cols-7 gap-5 border rounded-t w-full p-2">
           <div>Date</div>
           <div>Name</div>
           <div>Brand</div>
@@ -258,7 +258,7 @@ const InventoryName = () => {
         {inventory.map((item, index) => (
           <div
             key={index}
-            className=" grid md:grid-cols-8 capitalize grid-cols-1 gap-5 border w-full p-2"
+            className=" grid md:grid-cols-7 capitalize grid-cols-1 gap-5 border w-full p-2"
           >
             <div>{formatDate(item.createdAt)}</div>
             <div>{item.name}</div>
@@ -266,21 +266,23 @@ const InventoryName = () => {
             <div>{item.quantity}</div>
             <div>{item.size}</div>
             <div>{item.price}</div>
-            <div>
-              <button
-                onClick={() => openUpdate(item)}
-                className="px-2 py-2 bg-green-600 rounded"
-              >
-                Quantity
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={() => brandOpen(item)}
-                className="px-2 py-2 bg-green-600 rounded"
-              >
-                Update
-              </button>
+            <div className="flex gap-2 justify-center">
+              <div>
+                <button
+                  onClick={() => openUpdate(item)}
+                  className="px-2 py-2 bg-green-600 rounded"
+                >
+                  Quantity
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => brandOpen(item)}
+                  className="px-2 py-2 bg-green-600 rounded"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
         ))}
