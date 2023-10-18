@@ -33,7 +33,6 @@ const Creditors = () => {
 
         if (response.status === 200) {
           setCreditors(response.data);
-          console.log(response);
         }
       } catch (error) {
         console.log(error);
@@ -48,6 +47,31 @@ const Creditors = () => {
     const formattedTime = new Date(createdAt).toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
   };
+
+  const consolidateCreditors = (creditors) => {
+    const consolidatedCreditors = [];
+
+    creditors.forEach((creditor) => {
+      const existingCreditor = consolidatedCreditors.find(
+        (c) => c.client.name === creditor.client.name
+      );
+
+      if (!existingCreditor) {
+        consolidatedCreditors.push({ ...creditor });
+      } else {
+        const existingDate = new Date(existingCreditor.createdAt);
+        const newDate = new Date(creditor.createdAt);
+
+        if (newDate < existingDate) {
+          existingCreditor.createdAt = creditor.createdAt;
+        }
+      }
+    });
+
+    return consolidatedCreditors;
+  };
+
+  const consolidatedCreditors = consolidateCreditors(creditors);
 
   const handlePaymentChange = (value) => {
     setSelectedPayment(value);
@@ -85,10 +109,10 @@ const Creditors = () => {
   return (
     <div className="min-h-screen py-32 items-center justify-center flex w-full px-4 md:px-8 lg:px-12 flex-col">
       <p className="py-3 text-lg font-bold">Creditors List</p>
-      {creditors.length === 0 ? (
+      {consolidatedCreditors.length === 0 ? (
         <p className="text-lg">No creditors found.</p>
       ) : (
-        <div className=" md:grid hidden text-lg font-bold grid-cols-8 gap-5 border rounded-t w-full p-2">
+        <div className="md:grid hidden text-lg font-bold grid-cols-8 gap-5 border rounded-t w-full p-2">
           <div>Date</div>
           <div>BatchId</div>
           <div>Name</div>
@@ -99,7 +123,7 @@ const Creditors = () => {
           <div>Update</div>
         </div>
       )}
-      {creditors.length > 0 && creditors
+      {consolidatedCreditors.length > 0 && consolidatedCreditors
         .slice()
         .reverse()
         .map((item, index) => {

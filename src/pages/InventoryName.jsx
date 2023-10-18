@@ -9,6 +9,8 @@ const InventoryName = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
   const [brand, setBrand] = useState("");
+  const [brands, setBrands] = useState("");
+  const [openBrand, setOpenBrand] = useState(false);
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -19,6 +21,15 @@ const InventoryName = () => {
     const formattedDate = new Date(createdAt).toLocaleDateString();
     const formattedTime = new Date(createdAt).toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
+  };
+
+  const brandOpen = (selectedInventory) => {
+    setInventoryToUpdate(selectedInventory);
+    setOpenBrand(true);
+  };
+
+  const brandClose = () => {
+    setOpenBrand(false);
   };
   useEffect(() => {
     const getInnventory = async () => {
@@ -35,6 +46,30 @@ const InventoryName = () => {
     };
     getInnventory();
   }, [name]);
+
+  const updateBrand = async () => {
+    console.log("inventory");
+    if (!inventoryToUpdate) alert("inventory is empty");
+    const data = {
+      brand: brands,
+    };
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/inventory/brand/${inventoryToUpdate.id}`,
+        data
+      );
+
+      if (response.status === 200) {
+        console.log("Brand updated successfully");
+        console.log(response.data);
+        closeUpdate();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const addInventory = async () => {
     setError("");
@@ -231,13 +266,23 @@ const InventoryName = () => {
             <div>{item.quantity}</div>
             <div>{item.size}</div>
             <div>{item.price}</div>
-            <div>
-              <button
-                onClick={() => openUpdate(item)}
-                className="px-2 py-2 bg-green-600 rounded"
-              >
-                Quantity
-              </button>
+            <div className="flex gap-2 justify-center">
+              <div>
+                <button
+                  onClick={() => openUpdate(item)}
+                  className="px-2 py-2 bg-green-600 rounded"
+                >
+                  Quantity
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => brandOpen(item)}
+                  className="px-2 py-2 bg-green-600 rounded"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
         ))}
@@ -265,6 +310,36 @@ const InventoryName = () => {
               <button
                 className="w-full bg-green-500 text-white px-4 py-2 rounded-md flex"
                 onClick={closeUpdate}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
+        {openBrand && (
+          <div className="absolute items-center justify-center bg-white text-black w-[500px] px-6 py-6 rounded-lg">
+            <p className="text-black">Update Inventory</p>
+            <div className="py-3">
+              <p>Brand</p>
+              <input
+                className="w-full py-2 border-2 border-gray-500 rounded"
+                placeholder="Brand"
+                type="text"
+                value={brands}
+                onChange={(e) => setBrands(e.target.value)}
+              />
+            </div>
+            <div className="w-full flex md:flex-row flex-col gap-4 justify-center items-center mt-4">
+              <button
+                onClick={updateBrand}
+                className="w-full text-center bg-green-500 text-white px-4 py-2 rounded-md flex"
+              >
+                Submit
+              </button>
+              <button
+                className="w-full bg-green-500 text-white px-4 py-2 rounded-md flex"
+                onClick={brandClose}
               >
                 Close
               </button>
